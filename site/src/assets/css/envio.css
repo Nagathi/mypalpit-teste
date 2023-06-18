@@ -1,0 +1,194 @@
+
+.table{
+  width: 100%;
+  table-layout: fixed;
+}
+.flex-grow{
+  flex-grow: 1;
+}
+.table__cabecalho{
+  background-color:var(--azul-2);
+  color: var(--contraste-claro);
+  font-size: var(--fonte-tamanho-secundaria);
+}
+
+.row-table{
+  margin: 0; 
+  padding: 0!important;
+  border: 2px solid var(--azul-5)!important;
+  text-align: center;
+  vertical-align: middle;
+  height: 2.15rem;
+}
+.table__content{
+  color: var(--cinza-1);
+}
+.tb-empty{
+  color: var(--cinza-3);
+  padding: 0.5rem 0;
+  border: 2px solid var(--azul-5);
+  border-top: none;
+  text-align: center;
+  height: 2.15rem;
+}
+.input-envio{
+  margin-top: 0.25rem;
+  box-sizing: border-box;
+  min-width: 100%;
+  width: 17.25rem;
+  max-width: 100%;
+}
+
+.input-cheio{
+  width: 100%;
+}
+
+.button-remove{
+    background-image: url(../../assets/img/icon/lixeira-icon.svg);
+    background-repeat: no-repeat;
+    width: 30%;
+    height: 30px;
+    cursor: pointer;
+    background-position-x: 50%;
+    background-position-y: 5px;
+    background-color: var(--azul-5);
+    border-radius: 5px;
+    outline: none;
+    margin: auto;
+}
+.button-remove:hover{
+  background-color: var(--azul-4);
+}
+.input-hidden{
+  opacity: 0;
+	visibility: hidden;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+
+.input-text{
+  height: 24px;
+  padding-top: 0.25rem;
+  padding-left:0.5rem;
+  color: var(--cinza-4);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+
+.obrigatorio{
+  color: var(--cor-aviso);
+  margin-left: 0.25rem;
+}
+.bloco-1{
+  min-width: 420px;
+  width: 50%;
+  height: 251px;
+
+}
+.bloco-2{
+  min-width: 262px;
+  width: 50%;
+  padding-left: 0.5rem;
+}
+.imagem{
+  cursor: pointer;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  height: 100%;
+  width: 100%;
+  border-radius: 6px;
+}
+
+.imagem-container{
+  height: 100%;
+  min-width: 17rem;
+  width: 50%;
+  border-radius: 6px;
+  border: 1px solid var(--cinza-5);
+}
+.pai{
+  height: 100%;
+  width: 50%;
+  padding-left: 0.5rem;
+  overflow: hidden;
+  padding-right: 0.5rem;
+}
+.filho{
+  height: 50%;
+}
+.input--file-button{
+  height: 78px;
+  margin-top: 0.25rem;
+}
+
+.btn-adc{
+  width: 100%;
+  margin-bottom: 0.25rem;
+} 
+.bloco-btn{
+  width: 30%;
+}
+.bloco-lbl{
+  width: 70%;
+}
+.bloco-lbl--f{
+  padding-right: 0.5rem;
+  width: 50%;
+}
+
+@media screen and (max-width: 768px) {
+  
+  .bloco-1{
+    min-width: auto;
+    width: 100%;
+  }
+  .bloco-2{
+    padding-left: unset;
+    width: 100%;
+  }
+  .imagem-container{
+    width:  17rem;
+  }
+  .pai{
+    padding-right: unset;
+    width: 100%;
+  }
+  .btn-adc{
+    height: 100%;
+    width: 100%;
+  } 
+  .bloco-lbl{
+    width: 50%;
+  }
+  .bloco-lbl--f{
+
+    width: 100%;
+  }
+  .bloco-btn{
+    width: 50%;
+    margin-top: 0.5rem;
+  }
+}
+@media screen and (max-width: 550px) {
+  .bloco-1{
+    flex-direction: column  ;
+    height: 464px;
+  }
+  .input--file-button{
+    height: 55%;
+  }
+  .imagem-container{
+    margin: 0 auto;
+    min-height: 251px;
+
+  }
+  .pai{
+    margin-top: 0.25rem;
+    padding-left: unset;
+  }
+}

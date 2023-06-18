@@ -1,0 +1,48 @@
+:root {
+    --fonte-familia-corpo:'Rubik', sans-serif;
+    --fonte-familia-logo: 'Pacifico', cursive;
+    --fonte-tamanho-primaria: 14px;
+    --fonte-tamanho-secundaria: 16px;
+    --fonte-tamanho-input-titulo: 12px;
+    --fonte-tamanho-titulo:20px;
+    --fonte-tamanho-titulo-secundario:18px;
+
+    --header-1:24px;
+    --header-2:22px;
+    --header-3:20px;
+    --header-4:18px;
+
+    --fonte-peso-light: 300;
+    --fonte-peso-regular: 400;
+    --fonte-peso-medium:500;
+    --fonte-peso-bold:700;
+
+    --cinza-1: #3C4149;
+    --cinza-2: #586069;
+    --cinza-3: #64686D;
+    --cinza-4: #7f8b99;
+    --cinza-5: #c5cdd6;
+    --cinza-6: #F0F3F8;
+
+
+    --azul-1: #2E7BB4;
+    --azul-12:#2971A6;
+    --azul-2: #5C9ECF; 
+    --azul-4:#d5e8fd;
+    --azul-5: #E1EEFD; 
+    --azul-6: #f3f7fc;
+    
+    --azul-claro-transparente: #CBDDFF26;
+
+    --azul-escuro-transparente: rgba(110, 148, 190, 0.4);
+
+    --azul-sombra-focus: rgba(45, 170, 219, 0.3);
+
+    --contraste-claro: #ffffff;
+    --cor-pink: #D81D99;
+    --cor-sucesso: #2EA44F;
+    --cor-aviso:  #eb5757;
+    --cor-aviso-fundo: #FFEBE9; 
+    --cor-aviso-fundo2: rgba(253,245,242,1);
+    --borda-aviso:  rgba(15, 15, 15, 0.1) 0px 1px 2px, rgba(235, 87, 87, 0.3) 0px 0px 0px 1px inset;
+}

@@ -1,0 +1,69 @@
+<div class="geral">
+  <div class="perfil" *ngIf="!editar">
+    <img [src]="foto || 'assets/uploads/perfil/snap_avatar.svg'">
+    <label>{{nome}}</label>
+    <label>{{usuario}}</label>
+    <label>{{sobre}}</label>
+    <label>{{cidade}}</label>
+    <label>{{email}}</label>
+    <button (click)="onClick()" class="btn btn-primary w100">Editar perfil</button>
+  </div>
+
+  <div class="editar" *ngIf="editar">
+    <div class="upload-container">
+      <input type="file" (change)="onImageSelected($event)" accept="image/*" style="display: none" id="upload-input">
+      <label for="upload-input" class="upload-label">
+        <img [src]="foto || 'assets/uploads/perfil/snap_avatar.svg'" alt="Selecionar foto de perfil">
+      </label>
+    </div>
+    
+    <button class="btn btn-primary" (click)="salvar()">Upload de Imagem</button>
+
+    <form class="form">
+      <label style="font-weight: bold;">Nome</label>
+      <input type="text" class="form-control" [(ngModel)]="nome" name="nome">
+
+      <label style="font-weight: bold;">Usuário</label>
+      <input type="text" class="form-control" [(ngModel)]="usuario" name="usuario">
+
+      <label style="font-weight: bold;">Sobre</label>
+      <input type="text" class="form-control" [(ngModel)]="sobre" name="sobre">
+
+      <label style="font-weight: bold;">Cidade</label>
+      <input type="text" class="form-control" [(ngModel)]="cidade" name="cidade">
+
+      <label style="font-weight: bold;">E-mail</label>
+      <input type="text" class="form-control" [(ngModel)]="email" name="email">
+
+      <label style="font-weight: bold;">Área de interesse</label>
+      <select class="form-select">
+        <option value="Ciências Exatas">Ciências Exatas</option>
+        <option value="Ciências Humanas">Ciências Humanas</option>
+        <option value="Ciências Econômicas">Ciências Econômicas</option>
+        <option value="Ciências Biológicas">Ciências Biológicas</option>
+      </select>
+
+      <label for="checkbox1">
+        <input type="checkbox" id="checkbox1" name="checkbox" value="area"> Receber uma notificação por email quando um novo gráfico da minha área de interesse for postado.
+      </label>
+
+      <div class="btns">
+        <button class="btn btn-primary w-100" (click)="cancelar()">Cancelar</button>
+        <button class="btn btn-secondary w-100" (click)="salvar()">Salvar</button>
+      </div>
+    </form>
+  </div>
+
+  <div class="destaques">
+    <div class="h1-content">
+      <h1 style="font-size: 26px; margin-left: 20px; margin-top: 20px;">Destaques do perfil</h1>
+    </div>
+    <div class="botao-sobreposto">
+      <button><img src="assets/img/visual/default.svg"></button>
+    </div>
+    <div class="destaque-content">
+      <p>teste</p>
+    </div>
+  </div>
+</div>
+

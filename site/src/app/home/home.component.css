@@ -1,0 +1,21 @@
+.home{
+    display: flex;
+    margin-top: 10px;
+}
+.component-consulta{
+    display: flex;
+    justify-content: center;
+    margin-left: 20px;
+    width: 20%;
+    height: 35vw;
+    margin-right: 20px;
+    background-color: white;
+}
+.component-feed {
+    display: flex;
+    width: 75%;
+    height: 60vw;
+    margin-right: 50px;
+    background-color: white;
+}
+

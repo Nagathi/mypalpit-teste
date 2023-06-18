@@ -1,0 +1,37 @@
+{
+    "api_paths.php" : {
+        "email_confirmation_subject" : "Email de confirmação PALP-it",
+        "email_confirmation_content_1" : "Clique no link para confirmar o seu email <br><br><A href=\"",
+        "email_confirmation_content_2" : "\"> Link de confirmação </A>",
+        "email_redefinition_subject" : "Email de confirmação PALP-it",
+        "email_redefinition_content_1" : "Olá ",
+        "email_redefinition_content_2" : ",<br><br>Acesse o link abaixo para redefinir sua senha. Redefinir a sua senha <br><br>",
+        "email_redefinition_content_3" : "<br><br>Qualquer problema ou dúvida entre em contato pelo email palpit@contato.com",
+        "all_matters" : "Todas"
+    },
+    "sql-init" : {
+        "school_level" : {
+            "1" : "Fundamental I",
+            "2" : "Fundamental II",
+            "3" : "Médio",
+            "4" : "Superior"
+        },
+        "matters" : {
+            "1" : "Todas",
+            "2" : "Matemática",
+            "3" : "Biologia",
+            "4" : "Geografia",
+            "5" : "Física",
+            "6" : "Português",
+            "7" : "Química",
+            "8" : "Inglês",
+            "9" : "História"
+        },
+        "areas" : {
+            "1" : "Ciências Exatas",
+            "2" : "Ciências Humanas",
+            "3" : "Ciências Econômicas",
+            "4" : "Ciências da Saúde"
+        }
+    }
+}

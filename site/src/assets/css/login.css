@@ -1,0 +1,11 @@
+
+.flex--right{
+  display: flex;
+  justify-content: right;
+}
+.mensagem-erro{
+  color: var(--cor-aviso);
+  margin-top:0.5rem;
+  font-size: var(--fonte-tamanho-secundaria);
+  font-weight: 500;
+}

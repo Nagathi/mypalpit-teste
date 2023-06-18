@@ -1,0 +1,38 @@
+{
+    "api_paths.php" : {
+        "email_confirmation_subject" : "Email de confirmation PALP-it",
+        "email_confirmation_content_1" : "Cliquez sur le link à suivre pour confirmer votre email <br><br><A href=\"",
+        "email_confirmation_content_2" : "\">Lien de confirmation </A>",
+        "email_redefinition_subject" : "Redefinir votre mot de passe PALP-it",
+        "email_redefinition_content_1" : "Bonjour ",
+        "email_redefinition_content_2" : ",<br><br> Cliquez sur le link à suivre pour redefinir votre mot de passe. <br><br>",
+        "email_redefinition_content_3" : "<br><br>En cas de problème contactez ",
+        "all_matters" : "Toutes"
+    },
+    "sql-init" : {
+        "school_level" : {
+            "1" : "Écoles maternnelle",
+            "2" : "Écoles primaires",
+            "3" : "Colèges",
+            "4" : "Lycées",
+            "5" : "Enseignement Supérieur"
+        },
+        "matters" : {
+            "1" : "Toutes",
+            "2" : "Mathématique",
+            "3" : "Biologie",
+            "4" : "Géographie",
+            "5" : "Physique",
+            "6" : "Français",
+            "7" : "Chimie",
+            "8" : "Anglais",
+            "9" : "Histoire"
+        },
+        "areas" : {
+            "1" : "Sciences Exactes",
+            "2" : "Sciences Humaines",
+            "3" : "Économie",
+            "4" : "Santé"
+        }
+    }
+}
