@@ -10,14 +10,9 @@
   </div>
 
   <div class="editar" *ngIf="editar">
-    <div class="upload-container">
-      <input type="file" (change)="onImageSelected($event)" accept="image/*" style="display: none" id="upload-input">
-      <label for="upload-input" class="upload-label">
-        <img [src]="foto || 'assets/uploads/perfil/snap_avatar.svg'" alt="Selecionar foto de perfil">
-      </label>
-    </div>
-    
-    <button class="btn btn-primary" (click)="salvar()">Upload de Imagem</button>
+
+    <img [src]="foto || 'assets/uploads/perfil/snap_avatar.svg'">
+    <app-upload-dialog></app-upload-dialog>
 
     <form class="form">
       <label style="font-weight: bold;">Nome</label>

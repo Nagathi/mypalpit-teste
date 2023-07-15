@@ -9,9 +9,3 @@
   app-footer {
     flex: 0 0 auto;
   }
-  
-  app-consulta {
-    flex: 1;
-    display: flex;
-    justify-content: space-between;
-  }

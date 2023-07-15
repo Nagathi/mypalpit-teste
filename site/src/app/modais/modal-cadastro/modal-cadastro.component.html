@@ -1,0 +1,111 @@
+<div class="modal-wrapper" *ngIf="modalAberto">
+  <div class="modal-content">
+    <div class="modal-header">
+      <div class="align-header">
+        <img src="assets/img/icon/Logo_ppt.svg">
+        <h1 class="modal-title">Entrar no Palp-it</h1>
+      </div>
+
+      <button type="button" class="close close-button" (click)="fecharModalCadastro()">
+        <span>&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div *ngIf="error" class="error-div">
+        <p>{{errorMessage}}</p>
+      </div>
+      <form (ngSubmit)="submitForm()" #cadastroForm="ngForm">
+        <div class="mb-3">
+          <input type="text" class="form-control" id="nome" name="nome" placeholder="Digite seu nome"
+            [(ngModel)]="nome" required pattern="[A-Z][a-zA-Z]*" #nomeInput="ngModel">
+          <div *ngIf="nomeInput.invalid && (nomeInput.dirty || nomeInput.touched)" class="alert alert-danger">
+            <div *ngIf="nomeInput.errors?.['required']">
+              O nome é obrigatório.
+            </div>
+            <div *ngIf="nomeInput.errors?.['pattern=.*\d.*']">
+              O nome deve começar com letra maiúscula.
+            </div>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <input type="email" class="form-control" id="email" name="email" placeholder="Digite seu e-mail"
+            [(ngModel)]="email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" #emailInput="ngModel">
+          <div *ngIf="emailInput.invalid && (emailInput.dirty || emailInput.touched)" class="alert alert-danger">
+            <div *ngIf="emailInput.errors?.['required']">
+              O e-mail é obrigatório.
+            </div>
+            <div *ngIf="emailInput.errors?.['pattern']">
+              O e-mail deve estar no formato correto (example@mail.com).
+            </div>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <input type="text" class="form-control" id="usuario" name="usuario" placeholder="Digite seu usuário"
+            [(ngModel)]="usuario" required minlength="6" #usuarioInput="ngModel">
+          <div *ngIf="usuarioInput.invalid && (usuarioInput.dirty || usuarioInput.touched)" class="alert alert-danger">
+            <div *ngIf="usuarioInput.errors?.['required']">
+              O usuário é obrigatório.
+            </div>
+            <div *ngIf="usuarioInput.errors?.['minlength']">
+              O usuário deve ter no mínimo 6 caracteres.
+            </div>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <input type="password" class="form-control" id="senha" name="senha" placeholder="Digite sua senha"
+            [(ngModel)]="senha" required minlength="6" pattern=".*\d.*" #senhaInput="ngModel">
+          <div *ngIf="senhaInput.invalid && (senhaInput.dirty || senhaInput.touched)" class="alert alert-danger">
+            <div *ngIf="senhaInput.errors?.['required']">
+              A senha é obrigatória.
+            </div>
+            <div *ngIf="senhaInput.errors?.['minlength']">
+              A senha deve ter no mínimo 6 caracteres.
+            </div>
+            <div *ngIf="senhaInput.errors?.['pattern']">
+              A senha deve conter pelo menos um número.
+            </div>
+          </div>
+        </div>    
+        
+        <div class="mb-3">
+          <input type="password" class="form-control" id="confirmarSenha" name="confirmarSenha"
+            placeholder="Confirme sua senha" [(ngModel)]="confirmarSenha" required #confirmarSenhaInput="ngModel">
+          <div *ngIf="confirmarSenhaInput.invalid && (confirmarSenhaInput.dirty || confirmarSenhaInput.touched)"
+            class="alert alert-danger">
+            <div *ngIf="confirmarSenhaInput.errors?.['required']">
+              A confirmação de senha é obrigatória.
+            </div>
+            <div *ngIf="!confirmarSenhaCoincide()">
+              A confirmação de senha não coincide com a senha digitada.
+            </div>
+          </div>
+        </div>
+
+        <p class="area-interesse">Área de interesse</p>
+        <select class="form-control select-interesse">
+          <option>Ciências Exatas</option>
+          <option>Ciências Humanas</option>
+          <option>Ciências Econômicas</option>
+          <option>Ciências de Biológicas</option>
+        </select>
+        <div class="form-group">
+          <div class="form-check">
+            <input type="checkbox" id="notifyCheckbox" class="form-check-input">
+            <label for="notifyCheckbox" class="form-check-label">Receber uma notificação por email quando um novo gráfico da minha área de interesse for postado.</label>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary w-100" [disabled]="cadastroForm.invalid">Cadastrar</button>
+          <div class="register-container">
+            <p class="register-text">Ainda não é membro?</p>
+            <a class="register-link" (click)="redirectToEntrar()">CADASTRE-SE JÁ</a>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,49 @@
+<div class="modal-wrapper" *ngIf="modalAberto">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="align-header">
+          <h1>Criar nova senha</h1>
+        </div>
+  
+        <button type="button" class="close close-button" (click)="fecharModalAlterar()">
+          <span>&times;</span>
+        </button>
+        
+      </div>
+      <div class="modal-body">
+        <div *ngIf="error" class="error-div">
+          <p>{{errorMessage}}</p>
+        </div>
+        <form #alterarForm="ngForm">
+          <div class="mb-3">
+            <input type="password" class="form-control" id="senha1" name="senha1" placeholder="Senha anterior" [(ngModel)]="senha1">
+          </div>
+
+          <div class="mb-3">
+            <input type="password" class="form-control" id="senha2" name="senha2" placeholder="Digite sua senha"
+              [(ngModel)]="senha2" required minlength="6" pattern=".*\d.*" #senhaInput="ngModel">
+            <div *ngIf="senhaInput.invalid && (senhaInput.dirty || senhaInput.touched)" class="alert alert-danger">
+              <div *ngIf="senhaInput.errors?.['required']">
+                A senha é obrigatória.
+              </div>
+              <div *ngIf="senhaInput.errors?.['minlength']">
+                A senha deve ter no mínimo 6 caracteres.
+              </div>
+              <div *ngIf="senhaInput.errors?.['pattern']">
+                A senha deve conter pelo menos um número.
+              </div>
+            </div>
+          </div>    
+
+          <div class="mb-3">
+            <input type="password" class="form-control" id="senha3" name="senha3" placeholder="Confirmar nova senha" [(ngModel)]="senha3">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        
+        <button type="submit" class="btn btn-custom w-100" [disabled]="alterarForm.invalid" (click)="submit()">Redefinir Senha</button>
+        <button type="submit" class="btn btn-custom2 w-100" (click)="fecharModalAlterar()">Cancelar</button>
+      </div>
+    </div>
+  </div>

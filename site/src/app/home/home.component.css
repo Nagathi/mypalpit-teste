@@ -1,21 +1,36 @@
-.home{
+.home {
     display: flex;
+    flex-wrap: wrap;
     margin-top: 10px;
 }
-.component-consulta{
-    display: flex;
+
+.component-consulta {
+    position: relative;
+    top: 60px;
+    flex: 0 0 95%;
     justify-content: center;
-    margin-left: 20px;
-    width: 20%;
-    height: 35vw;
-    margin-right: 20px;
+    margin: 10px;
     background-color: white;
 }
+
 .component-feed {
-    display: flex;
-    width: 75%;
-    height: 60vw;
-    margin-right: 50px;
+    position: relative;
+    top: 60px;
+    flex: 0 0 90%;
+    margin: 10px;
     background-color: white;
 }
+
+@media (min-width: 768px) {
+    .component-consulta {
+        flex: 0 0 20%;
+        margin: 10px;
+    }
+    
+    .component-feed {
+        flex: 0 0 75%;
+        margin: 10px;
+    }
+}
+
 

@@ -1,64 +1,53 @@
 .geral{
+    position: relative;
     display: flex;
-    height: 80vh;
-    margin-top: 10px;    /* Margem superior */
-    margin-right: 40px;  /* Margem direita */
-    margin-bottom: 30px; /* Margem inferior */
-    margin-left: 40px; 
+    margin-top: 80px;
+    margin-left: 20px;
+    margin-right: 20px;
     flex-direction: row;
 }
 
 .perfil{
     display: flex;
     width: 20%;
-    height: 80%;
     background-color: rgb(255, 255, 255);
     flex-direction: column;
     margin-right: 20px;
-    top: 0;
-    left: 0;
 }
 
 .editar{
     display: flex;
     width: 20%;
-    height: 130vh;
     background-color: rgb(255, 255, 255);
     flex-direction: column;
     margin-right: 20px;
-    top: 0;
-    left: 0;
 }
 
-select option{
+.select option{
     color: black;
 }
 
 .destaques{
     display: flex;
     width: 100%;
-    height: 100%;
     flex-direction: column;
 }
 
 .h1-content{
     display: flex;
     width: 100%;
-    height: 40%;
     background-color: white;
 }
 
 .destaque-content{
     display: flex;
     width: 100%;
-    height: 60%;
     background-color: #e1effc;
 }
 
 .perfil img{
     display: flex   ;
     width: 80%;
-    height: 50%;
     align-self: center;
 }
 
@@ -120,6 +109,7 @@ label{
 .btns{
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
 }
 
 .btn.btn-secondary{
@@ -132,4 +122,32 @@ label{
     width: 90%;
     height: 30%;
     justify-self: center;
+}
+
+.perfil img{
+    align-self: center;
+    width: 150px;
+    height: auto;
+    border-radius: 50%;
+}
+
+.editar img{
+    align-self: center;
+    width: 150px;
+    height: auto;
+    border-radius: 50%;
+}
+
+/* Estilos para telas menores */
+@media screen and (max-width: 768px) {
+    .geral {
+        flex-direction: column;
+        margin: 10px;
+    }
+  
+    .perfil, .editar {
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 20px;
+    }
 }

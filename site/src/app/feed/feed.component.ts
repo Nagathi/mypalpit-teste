@@ -8,6 +8,7 @@ import { Component } from '@angular/core';
 export class FeedComponent {
   opcaoSelecionada: string = 'Novos';
 
+
   selecionarOpcao(opcao: string) {
     this.opcaoSelecionada = opcao;
   }

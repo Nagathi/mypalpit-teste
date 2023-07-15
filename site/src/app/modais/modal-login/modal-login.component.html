@@ -1,0 +1,39 @@
+<div class="modal-wrapper" *ngIf="modalAberto">
+  <div class="modal-content">
+    <div class="modal-header">
+      <div class="align-header">
+        <img src="assets/img/icon/Logo_ppt.svg">
+        <h1 class="modal-title">Entrar no Palp-it</h1>
+      </div>
+
+      <button type="button" class="close close-button" (click)="fecharModalLogin()">
+        <span>&times;</span>
+      </button>
+      
+    </div>
+    <div class="modal-body">
+      <div *ngIf="error" class="error-div">
+        <p>{{errorMessage}}</p>
+      </div>
+      <form>
+        <div class="mb-3">
+          <input type="email" class="form-control" id="email" name="email" placeholder="Digite seu e-mail" [(ngModel)]="email">
+        </div>
+
+        <div class="mb-3">
+          <input type="password" class="form-control" id="senha" name="senha" placeholder="Digite sua senha" [(ngModel)]="senha">
+        </div>
+        <div class="text-right mb-3">
+          <a class="forgot-password">Esqueceu sua senha</a>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="submit" class="btn btn-primary w-100" (click)="submit()">Entrar</button>
+      <div class="register-container">
+        <p class="register-text">Ainda não é membro?</p>
+        <a class="register-link" (click)="redirectToCadastrar()">CADASTRE-SE JÁ</a>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,98 @@
+<div class="modal-wrapper" *ngIf="modalAberto">
+    <div class="modal-content">
+        <button type="button" class="close-button" (click)="fecharModal()">
+            <span>&times;</span>
+        </button>
+      <div class="modal-header">
+        <h1>Seja bem-vindo à comunidade Palp-it</h1>
+      </div>
+  
+      <div class="bar" [class.open]="isContentOpen(1)" (click)="toggleContent(1)">
+        <h3 [class.active]="isContentOpen(1)" >A comunidade</h3>
+        <span class="arrow"></span>
+      </div>
+      <div class="content" *ngIf="isContentOpen(1)">
+        <p>A comunidade Palp-it se propõe a compartilhar, por meio de uma comunidade virtual, o acesso aos gráficos táteis, isso com a finalidade de contribuir ao aperfeiçoamento da educação de alunos com deficiência visual. Palp-it permite que educadores empenhados na produção desses materiais possam compartilhar o conhecimento e o esforço, facilitando o uso e reuso dos gráficos táteis em sala de aula.</p>
+      </div>
+  
+      <div class="bar" [class.open]="isContentOpen(2)" (click)="toggleContent(2)">
+        <h3 [class.active]="isContentOpen(2)">Participar</h3>
+        <span class="arrow"></span>
+      </div>
+      <div class="content" *ngIf="isContentOpen(2)">
+        <p>Se você já tem experiência com gráficos táteis, te convidamos a contribuir com uma educação mais igualitária! Compartilhe seu trabalho!</p>
+  
+        <p>Se você ainda não possui os recursos para produção dos gráficos táteis, não fique de fora! Te convocamos a explorar o conteúdo da nossa comunidade e levar para sua sala de aula material de alta qualidade para a formação dos seus alunos com deficiência visual!</p>
+      </div>
+  
+      <div class="bar" [class.open]="isContentOpen(3)" (click)="toggleContent(3)">
+        <h3 [class.active]="isContentOpen(3)">O que são gráficos táteis?</h3>
+        <span class="arrow" [class.open]="isContentOpen(3)"></span>
+      </div>
+      <div class="content" *ngIf="isContentOpen(3)">
+        <p>Você já parou para pensar como uma pessoa com deficiência visual pode explorar imagens, gráficos, fluxogramas que exigem muito da visão?</p>
+  
+        <p>Pois bem, este é o papel dos gráficos táteis! São desenhos em relevo impressos por impressoras braille. Através da produção desses materiais é possível que as pessoas com deficiência visual façam a exploração de uma representação visual utilizando o tato, semelhantemente ao Braille. Os gráficos táteis precisam ser utilizados no ensino dos alunos com deficiência visual, pois promovem maior participação dos alunos no processo de ensino-aprendizagem.</p>
+      </div>
+  
+      <div class="bar" [class.open]="isContentOpen(4)" (click)="toggleContent(4)">
+        <h3 [class.active]="isContentOpen(4)">A equipe</h3>
+        <span class="arrow" [class.open]="isContentOpen(4)"></span>
+      </div>
+      <div class="content" *ngIf="isContentOpen(4)">
+        <div class="row-content">
+            <div class="size-4">
+                <div class="person">
+                    <img src="assets/uploads/perfil/avatar.svg" alt="Foto da Pessoa">
+                    <h4>Bruno Merlin</h4>
+                    <p>Coordenador do projeto</p>
+                    <p>Professor do NDAE / UFPA</p>
+                </div>
+            </div>
+            <div class="size-4">
+                <div class="person">
+                    <img src="assets/uploads/perfil/avatar.svg" alt="Foto da Pessoa">
+                    <h4>Núria Carolline Silva da Rocha</h4>
+                    <p>Coordenadora técnica</p>
+                    <p>Discente do PPCA / NDAE / UFPA</p>
+                </div>
+            </div>
+            <div class="size-4">
+                <div class="person">
+                    <img src="assets/uploads/perfil/avatar.svg" alt="Foto da Pessoa">
+                    <h4>João Elias Vidueira Ferreira</h4>
+                    <p>Gestor e mediador do conteúdo</p>
+                    <p>Professor do IFPA / Campus de Tucuruí</p>
+                </div>
+            </div>
+            <div class="size-4">
+                <div class="person">
+                    <img src="assets/uploads/perfil/avatar.svg" alt="Foto da Pessoa">
+                    <h4>Meriely Eline Lima Gaia</h4>
+                    <p>Front-end designer</p>
+                    <p>Discente da FECOMP / CAMTUC / UFPA</p>
+                </div>
+            </div>
+            <div class="size-4">
+                <div class="person">
+                    <img src="assets/uploads/perfil/avatar.svg" alt="Foto da Pessoa">
+                    <h4>Hugo Henrique da Silva Lima</h4>
+                    <p>Desenvolvedor Back-end</p>
+                    <p>Discente da FECOMP / CAMTUC / UFPA</p>
+                </div>
+            </div>
+            <div class="size-4">
+                <div class="person">
+                    <img src="assets/uploads/perfil/avatar.svg" alt="Foto da Pessoa">
+                    <h4>Gustavo Da Silva Neves</h4>
+                    <p>Desenvolvedor Fullstack</p>
+                    <p>Discente da FECOMP / CAMTUC / UFPA</p>
+                </div>
+            </div>
+        </div>
+       </div>
+       <button type="submit" class="btn btn-custom" style="margin-bottom: 50px;" (click)="fecharModal()">Fechar</button>
+    </div>
+</div>
+  
+  

@@ -1,56 +1,69 @@
-
 <header class="header-home">
-    <nav class="navbar-left">
-        <ul>
-            <li routerLinkActive="active">
-                <a [routerLink]="['/home']"><img class="nav-item" src="assets/img/icon/logo.svg"></a>
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#"><img class="nav-item" src="assets/img/icon/logo_home.svg"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <form class="form-inline">
+                <input class="form-control mr-sm-2 bg-custom" type="search" placeholder="Pesquisar" aria-label="Pesquisar">
+                <button class="btn btn-custom my-2 my-sm-0" type="submit"><img
+                    src="assets/img/icon/search-icon.svg"></button>
+              </form>
             </li>
-            <li routerLinkActive="active">
-                <form class="form">
-                    <input type="text" class="form-control" name="searchTerm" placeholder="Pesquisar">
-                    <button type="submit" class="btn btn-primary"><img src="assets/img/icon/search-icon.svg"></button>
-                </form>
+            <li class="nav-item" *ngIf="logged">
+              <a class="nav-link" [routerLink]="['/home']"><img src="assets/img/icon/home.svg"><span>Início</span></a>
             </li>
-            <li routerLinkActive="active" *ngIf="logged">
-                <a [routerLink]="['/home']" class="link-home"><img src="assets/img/icon/home.svg"><span>Início</span></a>
+            <li class="nav-item" *ngIf="logged">
+              <a class="nav-link" [routerLink]="['/perfil']"><img src="assets/img/icon/perfil.svg"><span>Perfil</span></a>
             </li>
-            <li routerLinkActive="active" *ngIf="logged">
-                <a [routerLink]="['/perfil']" class="link-home"> <img src="assets/img/icon/perfil.svg"><span>Perfil</span></a>
+            <li class="nav-item" *ngIf="logged">
+              <a class="nav-link" [routerLink]="['/favoritos']"><img src="assets/img/icon/perfil.svg"><span>Salvos</span></a>
             </li>
-            <li routerLinkActive="active" *ngIf="logged">
-                <a [routerLink]="['/favoritos']" class="link-home"> <img src="assets/img/icon/perfil.svg"><span>Salvos</span></a>
+          </ul>
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item" *ngIf="!logged">
+              <a class="nav-link" [routerLink]="['/']"><img (click)="abrirModalInfo()" class="btn-home" src="assets/img/icon/up.svg"></a>
             </li>
-        </ul>
+            <li class="nav-item" *ngIf="!logged">
+              <a class="nav-link" (click)="abrirModalLogin()"><span>Entrar</span></a>
+            </li>
+            <li class="nav-item" *ngIf="!logged">
+              <a class="nav-link" (click)="abrirModalCadastro()"><span>Criar conta</span></a>
+            </li>
+            <li class="nav-item" *ngIf="logged">
+              <a class="nav-link" [routerLink]="['/']"><img src="assets/img/icon/plus.svg"><span>Novo envio</span></a>
+            </li>
+            <li class="nav-item" *ngIf="logged">
+              <label for="selecaoAtributos" class="select-image-label" (click)="alternarOpcoes()">
+                <img src="assets/uploads/perfil/avatar.svg" class="select-icon">
+                <div class="custom-select">
+                  <ul class="options-list" [ngClass]="{ 'show-options': mostrarOpcoes }">
+                    <li class="list">
+                      <a href="/perfil">Editar perfil</a>
+                    </li>
+                    <li class="list">
+                      <a (click)="abrirModalAlterar()">Alterar senha</a>
+                    </li>
+                    <li class="list">
+                      <a (click)="sair()">Sair</a>
+                    </li>
+                  </ul>
+                </div>
+              </label>
+            </li>
+          </ul>
+        </div>
+      </div>
     </nav>
-    <nav class="navbar-right">
-        <ul>
-            <li routerLinkActive="active" *ngIf="!logged">
-                <a [routerLink]="['/']" class="link-home"><img class="btn-home" src="assets/img/icon/up.svg"></a>
-            </li>
-            <li routerLinkActive="active" *ngIf="!logged">
-                <a (click)="abrirModalLogin()" class="link-home"><span>Entrar</span></a>
-            </li>
-            <li routerLinkActive="active" *ngIf="!logged">
-                <a (click)="abrirModalCadastro()" class="link-home"><span>Criar conta</span></a>
-            </li>
-            <li routerLinkActive="active" *ngIf="logged">
-                <a [routerLink]="['/']" class="link-home"><img src="assets/img/icon/plus.svg"><span>Novo envio</span></a>
-            </li>
-            <li routerLinkActive="active" *ngIf="logged">
-                <label for="selecaoAtributos" class="select-image-label" (click)="alternarOpcoes()">
-                    <img src="assets/uploads/perfil/avatar.svg" class="select-icon">
-                    <div class="custom-select">
-                      <ul class="options-list" [ngClass]="{ 'show-options': mostrarOpcoes }">
-                        <li *ngFor="let opcao of opcoes" (click)="selecionarOpcao(opcao)">{{ opcao }}</li>
-                      </ul>
-                    </div>
-
-                  </label>
-            </li>
-        </ul>
-    </nav>
-</header>
+  </header>
+  
 
 <app-modal-cadastro></app-modal-cadastro>
 <app-modal-login></app-modal-login>
-
+<app-modal-response></app-modal-response>
+<app-modal-alterar></app-modal-alterar>

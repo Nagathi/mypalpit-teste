@@ -5,9 +5,15 @@ import br.com.api.modelo.UsuarioModelo;
 import br.com.api.repositorio.UsuarioRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.util.Optional;
 
 @RestController
@@ -62,6 +68,55 @@ public class UsuarioControle {
 
                 return ResponseEntity.ok(usuarioAtualizado);
             }
+        } catch (UsuarioNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
+
+    @PostMapping(value = "/upload/{codigo}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public String uploadFile(@PathVariable("codigo") Long codigo, @RequestParam("file") MultipartFile file) {
+        if (!file.isEmpty()) {
+            try {
+               
+                String uploadDir = "C:/Users/gu-gu/OneDrive/Documentos/palpit/api/src/fotos/";
+
+                
+                String fileName = file.getOriginalFilename();
+                String pathFotos = "/" + file.getOriginalFilename();
+                
+                Path destination = Path.of(uploadDir + fileName);
+                
+                Files.copy(file.getInputStream(), destination, StandardCopyOption.REPLACE_EXISTING);
+                
+                Optional<UsuarioModelo> optionalUsuario = ur.findById(codigo);
+                UsuarioModelo usuario = optionalUsuario.orElse(null);
+        
+                usuario.setFoto(pathFotos.toString()); 
+                ur.save(usuario);
+                
+                return "Arquivo salvo com sucesso!";
+            } catch (IOException e) {
+                e.printStackTrace();
+               
+                return "Erro ao salvar o arquivo!";
+            }
+        } else {
+         
+            return "Arquivo não enviado!";
+        }
+    }
+
+     @PutMapping("/atualizar_senha/{id}")
+    public ResponseEntity<?> atualizarSenha(@PathVariable Long id, @RequestBody UsuarioModelo usuarioDTO) {
+        try {
+            UsuarioModelo usuario = ur.findById(id)
+            .orElseThrow(() -> new UsuarioNotFoundException("Usuário não encontrado"));
+        
+            usuario.setSenha(usuarioDTO.getSenha());
+
+            UsuarioModelo usuarioAtualizado = ur.save(usuario);
+
+            return ResponseEntity.ok(usuarioAtualizado);
         } catch (UsuarioNotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }

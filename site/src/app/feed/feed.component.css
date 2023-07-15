@@ -62,16 +62,18 @@ h1{
 }
 
 .select-feed{
-    width: 22%;
+    width: 35%;
     display: flex;
     font-size: 16px;
     align-items: center;
+    margin-right: 100px;
     border-bottom: 1px solid #000;
-    right: 10px;
 }
 
 .select-feed select{
     border: none;
+    margin-right: 25%;
+    
 }
 
 .select-feed span{

@@ -9,6 +9,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent {
+  codigo: string = ''
   foto: string = '';
   nome: string = '';
   usuario: string = '';
@@ -21,7 +22,7 @@ export class ProfileComponent {
 
   constructor(
     private usuarioService: UsuarioService,
-    private http: HttpClient
+    private http: HttpClient,
   ) {}
 
   ngOnInit() {
@@ -36,7 +37,8 @@ export class ProfileComponent {
 
   carregarDadosUsuario() {
     if (this.usuarioService.usuario) {
-      this.foto = this.usuarioService.usuario.foto || '';
+      this.codigo = this.usuarioService.usuario.codigo || '???';
+      this.foto = "http://localhost:8080/" + this.usuarioService.usuario.foto || '';
       this.nome = this.usuarioService.usuario.nome || '';
       this.email = this.usuarioService.usuario.email || '';
       this.usuario = this.usuarioService.usuario.usuario || '';
@@ -60,7 +62,6 @@ export class ProfileComponent {
   salvar() {
   
     const usuario = {
-      foto: this.foto || 'assets/uploads/perfil/snap_avatar.svg',
       nome: this.nome,
       email: this.email,
       usuario: this.usuario,

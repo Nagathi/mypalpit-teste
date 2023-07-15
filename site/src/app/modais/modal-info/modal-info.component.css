@@ -1,0 +1,162 @@
+.modal-wrapper {
+    position: fixed;
+    display: flex;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  
+  .modal.modal-aberto {
+    overflow: hidden;
+  }
+
+  .modal-content {
+    position: relative;
+    display: flex;
+    background-color: #fff;
+    border-radius: 5px;
+    max-width: 1000px;
+    width: 100%;
+    height: 80%;
+    max-height: 1000px;
+    overflow-y: scroll;
+  }
+
+  .btn-custom{
+    width: 90%;
+    background-color: #2e7ab5;
+    color: #fff;
+    margin-right: 50px;
+    margin-left: 50px;
+    border-radius: 5px;
+    height: 50px;
+  }
+  
+  .modal-header {
+    padding: 0px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 50px;
+    margin-top: 35px;
+  }
+  
+  .bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 50px;
+    margin-right: 50px;
+    margin-top: -10px;
+    cursor: pointer;
+    margin-bottom: 10px;
+    padding: 0px;
+    background-color: #fff;
+    border-radius: 5px;
+    height: 60px;
+    border: 0.5px solid #ccc;
+  }
+  
+  .bar.open {
+    background-color: #e7f1ff;
+  }
+  
+  .bar h3 {
+    margin-left: 20px;
+    font-size: 18px;
+    margin-right: auto;
+  }
+  
+  .bar h3.active {
+    color: #196ae5;
+  }
+  
+  .bar .arrow {
+    margin-left: 10px;
+  }
+  
+  .bar .arrow::after {
+    content: "▶";
+  }
+  
+  .bar .arrow.open::after {
+    content: "▼";
+  }
+
+  .close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .close-button span {
+    font-size: 54px;
+    color: #999;
+  }
+  
+  .close-button:hover span {
+    color: #000;
+  }
+  
+  .content {
+    display: flex;
+    flex-direction: column;
+    margin-top: -10px;
+    margin-left: 60px;
+    margin-right: 60px;
+    padding: 10px;
+    background-color: #f5f5f5;
+    border-radius: 5px;
+  }
+
+  .content p{
+    font-style: normal;
+    font-size: 16px;
+    color: black;
+  }
+  
+  .content.show {
+    display: block;
+  }
+  
+  .person {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .person img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 0.5px solid #ccc;
+  }
+  
+  .person h4 {
+    margin-top: 10px;
+    font-size: 14px ;
+  }
+  
+  .person p {
+    margin-bottom: 5px;
+    font-size: 14px ;
+  }
+
+  .row-content{
+    display: flex;
+    flex-direction: row;
+  }
+
+  .size-4{
+    max-width: 120px;
+    margin-right: 30px;
+  }
+  
