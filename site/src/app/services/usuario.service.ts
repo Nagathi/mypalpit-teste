@@ -1,12 +1,15 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { environment } from 'environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsuarioService {
-  private apiUrl = 'http://localhost:8080'; // URL da API
+  private readonly apiUrl = environment.apiURL;
+  private readonly pathAttUser = environment.pathAttUser;
+
   private usuarioSubject: BehaviorSubject<any> = new BehaviorSubject<any>(null);
   public usuario$: Observable<any> = this.usuarioSubject.asObservable();
 
@@ -21,6 +24,6 @@ export class UsuarioService {
   }
 
   atualizarUsuario(id: number, usuario: any): Observable<any> {
-    return this.http.put<any>(`${this.apiUrl}/atualizar_user/${id}`, usuario);
+    return this.http.put<any>(`${this.apiUrl}/${this.pathAttUser}/${id}`, usuario);
   }
 }

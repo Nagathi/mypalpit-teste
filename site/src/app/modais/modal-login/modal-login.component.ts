@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { ModalLoginService } from '../../services/modal-login.service';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http'
 import { UsuarioService } from '../../services/usuario.service';
-import { ModalResponseService } from 'src/app/services/modal-response.service';
 import { ModalCadastroService } from 'src/app/services/modal-cadastro.service';
+import { environment } from 'environment';
 
 @Component({
   selector: 'app-modal-login',
@@ -11,6 +11,9 @@ import { ModalCadastroService } from 'src/app/services/modal-cadastro.service';
   styleUrls: ['./modal-login.component.css']
 })
 export class ModalLoginComponent {
+  private readonly apiURL = environment.apiURL;
+  private readonly pathLogin = environment.pathLogin;
+
   modalAberto: boolean = false;
   email: string = 'ragbr7070@gmail.com';
   senha: string = 'allspark1';
@@ -34,7 +37,7 @@ export class ModalLoginComponent {
 
   submit(){
 
-    this.http.get(`http://localhost:8080/login?email=${this.email}&senha=${this.senha}`)
+    this.http.get(`${this.apiURL}/${this.pathLogin}?email=${this.email}&senha=${this.senha}`)
       .subscribe(
         (data: any) => {
           const usuario = {

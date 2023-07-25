@@ -72,8 +72,8 @@ a {
 /* Responsiveness */
 @media screen and (max-width: 768px) {
   .header-home {
-    position: relative;
-    bottom: auto;
+    position: fixed;
+    bottom: 0;
   }
 
   .navbar-left,

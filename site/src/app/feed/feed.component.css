@@ -1,11 +1,10 @@
-
-.conteudo { 
-    margin-bottom: 20px; 
-    cursor: pointer; 
-    text-align: center;
-    
+.feed{
+    position: relative;
+    width: 100%;
+    padding-bottom: 100px;
 }
-.conteudo p {
+
+.content p {
     color: black;
     padding: 5px 10px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
@@ -19,8 +18,8 @@
     height: 100%;
     display: flex;
     flex-wrap: wrap;
-    top: 0;
-    right: 0;
+    justify-content: center;
+    padding-top: 50px;
 }
 
 .content *{
@@ -32,7 +31,7 @@
     display: flex;
 }
 
-#conteudos a{
+.content a{
    text-decoration: none;
 }
 
@@ -87,3 +86,33 @@ h1{
     display: flex;
     flex-direction: row;
 }
+
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+  }
+  
+  .page-button {
+    padding: 5px 10px;
+    margin: 0 5px;
+    background-color: #2E7BB4;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .page-button:hover {
+    background-color: #5c9ecf
+  }
+  
+  .page-button[disabled] {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  
+  .pagination span {
+    margin: 0 10px;
+  }
+  

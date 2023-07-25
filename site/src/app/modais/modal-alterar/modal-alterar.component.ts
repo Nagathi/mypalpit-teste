@@ -1,5 +1,6 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { environment } from 'environment';
 import { ModalAlterarService } from 'src/app/services/modal-alterar.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
 
@@ -9,6 +10,9 @@ import { UsuarioService } from 'src/app/services/usuario.service';
   styleUrls: ['./modal-alterar.component.css']
 })
 export class ModalAlterarComponent {
+  private readonly apiURL = environment.apiURL;
+  private readonly pathAttSenha = environment.pathAttSenha;
+
   modalAberto: boolean = false;
   error: boolean = false;
   errorMessage: string = ''
@@ -42,7 +46,7 @@ export class ModalAlterarComponent {
           senha: this.senha2
         }
         let codigo = parseInt(this.usuarioService.usuario.codigo);
-        this.http.put(`http://localhost:8080/atualizar_senha/${codigo}`, usuarioModelo).subscribe(
+        this.http.put(`${this.apiURL}/${this.pathAttSenha}/${codigo}`, usuarioModelo).subscribe(
           (response: any) => {
             this.modalService.fecharModalAlterar();
             this.usuarioService.setUsuario(usuarioModelo);

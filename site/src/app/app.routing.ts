@@ -2,6 +2,7 @@ import { Routes, RouterModule } from "@angular/router";
 import { HomeComponent } from "./home/home.component";
 import { ProfileComponent } from "./profile/profile.component";
 import { FavoriteComponent } from "./favorite/favorite.component";
+import { EnvioComponent } from "./envio/envio.component";
 
 const APP_ROUTES: Routes = [
     {
@@ -22,6 +23,11 @@ const APP_ROUTES: Routes = [
     {
         path: 'favoritos',
         component: FavoriteComponent,
+        data: { title: 'Palpit' }
+    },
+    {
+        path: 'envio',
+        component: EnvioComponent,
         data: { title: 'Palpit' }
     },
 ];

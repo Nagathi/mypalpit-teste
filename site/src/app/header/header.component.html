@@ -36,7 +36,7 @@
               <a class="nav-link" (click)="abrirModalCadastro()"><span>Criar conta</span></a>
             </li>
             <li class="nav-item" *ngIf="logged">
-              <a class="nav-link" [routerLink]="['/']"><img src="assets/img/icon/plus.svg"><span>Novo envio</span></a>
+              <a class="nav-link" [routerLink]="['/envio']"><img src="assets/img/icon/plus.svg"><span>Novo envio</span></a>
             </li>
             <li class="nav-item" *ngIf="logged">
               <label for="selecaoAtributos" class="select-image-label" (click)="alternarOpcoes()">
@@ -44,7 +44,7 @@
                 <div class="custom-select">
                   <ul class="options-list" [ngClass]="{ 'show-options': mostrarOpcoes }">
                     <li class="list">
-                      <a href="/perfil">Editar perfil</a>
+                      <a routerLink="/perfil">Editar perfil</a>
                     </li>
                     <li class="list">
                       <a (click)="abrirModalAlterar()">Alterar senha</a>

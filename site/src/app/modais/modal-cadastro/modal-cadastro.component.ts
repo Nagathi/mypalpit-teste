@@ -3,6 +3,7 @@ import { ModalCadastroService } from '../../services/modal-cadastro.service';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { UsuarioService } from '../../services/usuario.service';
 import { ModalLoginService } from '../../services/modal-login.service';
+import { environment } from 'environment';
 
 @Component({
   selector: 'app-modal-cadastro',
@@ -10,6 +11,9 @@ import { ModalLoginService } from '../../services/modal-login.service';
   styleUrls: ['./modal-cadastro.component.css']
 })
 export class ModalCadastroComponent {
+  private readonly apiURL = environment.apiURL;
+  private readonly pathCadastro = environment.pathCadastro;
+
   modalAberto: boolean = false;
   nome: string = '';
   email: string = '';
@@ -35,6 +39,7 @@ export class ModalCadastroComponent {
 
     const usuarioModelo: any = {
 
+      foto: '/avatar.svg',
       nome: this.nome,
       email: this.email,
       usuario: this.usuario,
@@ -42,7 +47,7 @@ export class ModalCadastroComponent {
 
     }
     
-    this.http.post('http://localhost:8080/cadastrar_usuarios', usuarioModelo)
+    this.http.post(`${this.apiURL}/${this.pathCadastro}`, usuarioModelo)
     .subscribe(
       (response) => {
         this.usuarioService.setUsuario(response);

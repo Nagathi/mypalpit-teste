@@ -69,12 +69,10 @@ label{
     outline: none;
     text-decoration: none;
     margin-bottom: 20px;
-    margin-left: 20px;
     align-items: center;
 }
 
 .margem input{
-    margin-left: 20px;
     align-items: center;
 }
 
@@ -147,6 +145,7 @@ label{
   
     .perfil, .editar {
         width: 100%;
+        margin-top: 70px;
         margin-right: 0;
         margin-bottom: 20px;
     }

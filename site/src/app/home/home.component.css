@@ -16,6 +16,8 @@
 .component-feed {
     position: relative;
     top: 60px;
+    height: 60vw;
+    bottom: 150px;
     flex: 0 0 90%;
     margin: 10px;
     background-color: white;

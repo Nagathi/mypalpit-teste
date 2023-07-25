@@ -14,7 +14,7 @@ export class ModalLoginService {
 
   private loginSubject = new Subject<boolean>();
   login$ = this.loginSubject.asObservable();
-
+  
   constructor() { }
 
   abrirModalLogin() {

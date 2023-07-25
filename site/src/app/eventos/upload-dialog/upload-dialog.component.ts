@@ -1,6 +1,7 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { environment } from 'environment';
+
 import { UsuarioService } from 'src/app/services/usuario.service';
 
 @Component({
@@ -9,21 +10,51 @@ import { UsuarioService } from 'src/app/services/usuario.service';
   styleUrls: ['./upload-dialog.component.css']
 })
 export class UploadDialogComponent {
+  private readonly apiURL = environment.apiURL;
+  private readonly pathLogin = environment.pathLogin;
+  private readonly pathUpload = environment.pathAttFoto;
+
   codigo: string = '';
+  email: string = '';
+  senha: string = ''
+
   constructor(private http: HttpClient,
-            private userService: UsuarioService,
-            private router: Router
+              private userService: UsuarioService,
             ){
   }
 
   ngOnInit(){
     this.codigo = this.userService.usuario.codigo;
+    this.email = this.userService.usuario.email;
+    this.senha = this.userService.usuario.senha;
   }
 
-  reconstruirProfileComponent() {
-    this.router.navigateByUrl('/perfil', { skipLocationChange: true }).then(() => {
-      this.router.navigate(['/perfil']);
-    });
+  atualizarDados(){
+    
+    this.http.get(`${this.apiURL}/${this.pathLogin}?email=${this.email}&senha=${this.senha}`)
+    .subscribe(
+        (data: any) => {
+          const usuario = {
+            codigo: data.codigo,
+            foto: data.foto,
+            nome: data.nome,
+            usuario: data.usuario,
+            email: data.email,
+            senha: data.senha,
+            sobre: data.sobre,
+            cidade: data.cidade
+          };
+          this.userService.setUsuario(usuario);
+      },
+      (error: HttpErrorResponse) => {
+        if (error.status === 404) {
+            alert(error.status);
+        } else {
+          alert(error.status);
+        }
+      }
+    );
+    
   }
   openFileSelector(): void {
 
@@ -42,16 +73,22 @@ export class UploadDialogComponent {
       const formData: FormData = new FormData();
       formData.append('file', file);
 
-      this.http.post(`http://localhost:8080/upload/${this.codigo}`, formData).subscribe(
+      this.http.post(`${this.apiURL}/${this.pathUpload}/${this.codigo}`, formData).subscribe(
         (response: any) => {
           alert('Upload concluído');
-          this.reconstruirProfileComponent();
+          this.atualizarDados();
         },
-        (error: any) => {
-          console.error('Upload error', error);
-          // Lide com o erro, se necessário
+        (error: HttpErrorResponse) => {
+          if (error.status == 200){
+            alert('Upload concluído');
+            this.atualizarDados();
+          }else{
+            alert('Upload error ' + error.status);
+          }
+
         }
       );
+
     }
   }  
 }

@@ -19,7 +19,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UploadDialogComponent } from './eventos/upload-dialog/upload-dialog.component';
 import { ModalResponseComponent } from './modais/modal-response/modal-response.component';
 import { ModalInfoComponent } from './modais/modal-info/modal-info.component';
-import { ModalAlterarComponent } from './modais/modal-alterar/modal-alterar.component'
+import { ModalAlterarComponent } from './modais/modal-alterar/modal-alterar.component';
+import { EnvioComponent } from './envio/envio.component'
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { ModalAlterarComponent } from './modais/modal-alterar/modal-alterar.comp
     ModalResponseComponent,
     ModalInfoComponent,
     ModalAlterarComponent,
+    EnvioComponent,
   ],
   imports: [
     BrowserModule,

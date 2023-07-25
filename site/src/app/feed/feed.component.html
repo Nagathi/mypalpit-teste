@@ -13,61 +13,27 @@
         </div>
     </div>
     <div class="content">
-        <section id="conteudos" >
-            <a routerLink="/" href="#">
-              <section class="conteudo">
-                <img class="img-content" src="assets/img/icon/1142818.jpg">
-                <p class="p-nome">Nome</p>
-                <div class="p-usuario"><img src="assets/img/icon/avatar.svg"><p>Gustavo da Silva Neves</p></div>
-              </section>
-            </a>
-        </section>
-        <section id="conteudos" >
-            <a routerLink="/" href="#">
-              <section class="conteudo">
-                <img class="img-content" src="assets/img/icon/1142818.jpg">
-                <p class="p-nome">Nome</p>
-                <div class="p-usuario"><img src="assets/img/icon/avatar.svg"><p>Gustavo da Silva Neves</p></div>
-              </section>
-            </a>
-        </section>
-        <section id="conteudos" >
-            <a routerLink="/" href="#">
-              <section class="conteudo">
-                <img class="img-content" src="assets/img/icon/1142818.jpg">
-                <p class="p-nome">Nome</p>
-                <div class="p-usuario"><img src="assets/img/icon/avatar.svg"><p>Gustavo da Silva Neves</p></div>
-              </section>
-            </a>
-        </section>
-        <section id="conteudos" >
-            <a routerLink="/" href="#">
-              <section class="conteudo">
-                <img class="img-content" src="assets/img/icon/1142818.jpg">
-                <p class="p-nome">Nome</p>
-                <div class="p-usuario"><img src="assets/img/icon/avatar.svg"><p>Gustavo da Silva Neves</p></div>
-              </section>
-            </a>
-        </section>
-        <section id="conteudos" >
-            <a routerLink="/" href="#">
-              <section class="conteudo">
-                <img class="img-content" src="assets/img/icon/1142818.jpg">
-                <p class="p-nome">Nome</p>
-                <div class="p-usuario"><img src="assets/img/icon/avatar.svg"><p>Gustavo da Silva Neves</p></div>
-              </section>
-            </a>
-        </section>
-        <section id="conteudos" >
-            <a routerLink="/" href="#">
-              <section class="conteudo">
-                <img class="img-content" src="assets/img/icon/1142818.jpg">
-                <p class="p-nome">Nome</p>
-                <div class="p-usuario"><img src="assets/img/icon/avatar.svg"><p>Gustavo da Silva Neves</p></div>
-              </section>
-            </a>
-        </section>
+      <section *ngFor="let section of getSectionsPorPagina()" id="conteudos">
+        <a routerLink="/" href="#">
+          <img class="img-content" [src]="section.imagem">
+          <p class="p-nome">{{ section.nome }}</p>
+          <div class="p-usuario">
+            <img [src]="section.avatar">
+            <p>{{ section.usuario }}</p>
+          </div>
+        </a>
+      </section>
     </div>
     
+    
+    <div class="pagination">
+      <button class="page-button" [disabled]="paginaAtual === 1" (click)="mudarPagina(paginaAtual - 1)">
+        Anterior
+      </button>
+      <span>{{ paginaAtual }} de {{ totalPaginas() }}</span>
+      <button class="page-button" [disabled]="paginaAtual === totalPaginas()" (click)="mudarPagina(paginaAtual + 1)">
+        Próxima
+      </button>
+    </div>
 
 </div>

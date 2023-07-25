@@ -1,17 +1,17 @@
 <div class="geral">
   <div class="perfil" *ngIf="!editar">
-    <img [src]="foto || 'assets/uploads/perfil/snap_avatar.svg'">
+    <img [src]="foto">
     <label>{{nome}}</label>
     <label>{{usuario}}</label>
     <label>{{sobre}}</label>
     <label>{{cidade}}</label>
     <label>{{email}}</label>
-    <button (click)="onClick()" class="btn btn-primary w100">Editar perfil</button>
+    <button (click)="onClick()" class="btn btn-primary w-100">Editar perfil</button>
   </div>
 
   <div class="editar" *ngIf="editar">
 
-    <img [src]="foto || 'assets/uploads/perfil/snap_avatar.svg'">
+    <img [src]="foto">
     <app-upload-dialog></app-upload-dialog>
 
     <form class="form">
