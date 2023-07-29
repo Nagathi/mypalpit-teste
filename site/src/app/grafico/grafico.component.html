@@ -1,0 +1,22 @@
+<div class="arquivo">
+    <div class="autor">
+        <img src="{{grafico.avatar}}">
+        <div class="nome">
+            <p>{{grafico.usuario}}</p>
+            <span>{{grafico.data}} às {{grafico.hora}}</span>
+        </div>
+    </div>
+    <div class="titulo">
+        <h2>{{grafico.titulo}}</h2>
+        <span class="keywords">{{grafico.keywords}}</span>
+        <span class="descricao">{{grafico.descricao}}</span>
+    </div>
+    <div class="imagem">
+        <img src="{{grafico.imagem}}">
+    </div>
+    <div class="buttons">
+        <button><img src="./assets/img/icon/gostar.png">Gostei</button>
+        <button><img src="./assets/img/icon/comentar.png">Comentar</button>
+        <button (click)="salvar()"><img src="./assets/img/icon/salvar.png">Salvar</button>
+    </div>
+</div>

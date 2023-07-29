@@ -1,4 +1,8 @@
+import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { environment } from 'environment';
+import { GraficoService } from '../services/grafico.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -7,158 +11,53 @@ import { Component } from '@angular/core';
   styleUrls: ['./feed.component.css']
 })
 export class FeedComponent {
+  private readonly apiURL = environment.apiURL;
+  private readonly pathListarAquivos = environment.pathListarAquivos;
+
+  encontrado: boolean = false;
   opcaoSelecionada: string = 'Novos';
   itensPorPagina = 6;
   paginaAtual = 1;
-  sections: any[] = [
-    {
-      nome: 'Nome',
-      usuario: 'Gustavo da Silva Neves 1',
-      imagem: 'assets/img/icon/1142818.jpg',
-      avatar: 'assets/img/icon/avatar.svg'
-    },
-    {
-      nome: 'Nome',
-      usuario: 'Gustavo da Silva Neves 2',
-      imagem: 'assets/img/icon/1142818.jpg',
-      avatar: 'assets/img/icon/avatar.svg'
-    },
-    {
-      nome: 'Nome',
-      usuario: 'Gustavo da Silva Neves 3',
-      imagem: 'assets/img/icon/1142818.jpg',
-      avatar: 'assets/img/icon/avatar.svg'
-    },
-    {
-      nome: 'Nome',
-      usuario: 'Gustavo da Silva Neves 4',
-      imagem: 'assets/img/icon/1142818.jpg',
-      avatar: 'assets/img/icon/avatar.svg'
-    },
-    {
-      nome: 'Nome',
-      usuario: 'Gustavo da Silva Neves 5',
-      imagem: 'assets/img/icon/1142818.jpg',
-      avatar: 'assets/img/icon/avatar.svg'
-    },
-    {
-      nome: 'Nome',
-      usuario: 'Gustavo da Silva Neves 6',
-      imagem: 'assets/img/icon/1142818.jpg',
-      avatar: 'assets/img/icon/avatar.svg'
-    },
-    {
-      nome: 'Nome',
-      usuario: 'Gustavo da Silva Neves 7',
-      imagem: 'assets/img/icon/1142818.jpg',
-      avatar: 'assets/img/icon/avatar.svg'
-    },
-    {
-      nome: 'Nome',
-      usuario: 'Gustavo da Silva Neves 8',
-      imagem: 'assets/img/icon/1142818.jpg',
-      avatar: 'assets/img/icon/avatar.svg'
-    },
-    {
-      nome: 'Nome',
-      usuario: 'Gustavo da Silva Neves 9',
-      imagem: 'assets/img/icon/1142818.jpg',
-      avatar: 'assets/img/icon/avatar.svg'
-    },
-    {
-      nome: 'Nome',
-      usuario: 'Gustavo da Silva Neves 10',
-      imagem: 'assets/img/icon/1142818.jpg',
-      avatar: 'assets/img/icon/avatar.svg'
-    },
-    {
-      nome: 'Nome',
-      usuario: 'Gustavo da Silva Neves 11',
-      imagem: 'assets/img/icon/1142818.jpg',
-      avatar: 'assets/img/icon/avatar.svg'
-    },
-    {
-      nome: 'Nome',
-      usuario: 'Gustavo da Silva Neves 12',
-      imagem: 'assets/img/icon/1142818.jpg',
-      avatar: 'assets/img/icon/avatar.svg'
-    },
-    {
-      nome: 'Nome',
-      usuario: 'Gustavo da Silva Neves 1',
-      imagem: 'assets/img/icon/1142818.jpg',
-      avatar: 'assets/img/icon/avatar.svg'
-    },
-    {
-      nome: 'Nome',
-      usuario: 'Gustavo da Silva Neves 2',
-      imagem: 'assets/img/icon/1142818.jpg',
-      avatar: 'assets/img/icon/avatar.svg'
-    },
-    {
-      nome: 'Nome',
-      usuario: 'Gustavo da Silva Neves 3',
-      imagem: 'assets/img/icon/1142818.jpg',
-      avatar: 'assets/img/icon/avatar.svg'
-    },
-    {
-      nome: 'Nome',
-      usuario: 'Gustavo da Silva Neves 4',
-      imagem: 'assets/img/icon/1142818.jpg',
-      avatar: 'assets/img/icon/avatar.svg'
-    },
-    {
-      nome: 'Nome',
-      usuario: 'Gustavo da Silva Neves 5',
-      imagem: 'assets/img/icon/1142818.jpg',
-      avatar: 'assets/img/icon/avatar.svg'
-    },
-    {
-      nome: 'Nome',
-      usuario: 'Gustavo da Silva Neves 6',
-      imagem: 'assets/img/icon/1142818.jpg',
-      avatar: 'assets/img/icon/avatar.svg'
-    },
-    {
-      nome: 'Nome',
-      usuario: 'Gustavo da Silva Neves 7',
-      imagem: 'assets/img/icon/1142818.jpg',
-      avatar: 'assets/img/icon/avatar.svg'
-    },
-    {
-      nome: 'Nome',
-      usuario: 'Gustavo da Silva Neves 8',
-      imagem: 'assets/img/icon/1142818.jpg',
-      avatar: 'assets/img/icon/avatar.svg'
-    },
-    {
-      nome: 'Nome',
-      usuario: 'Gustavo da Silva Neves 9',
-      imagem: 'assets/img/icon/1142818.jpg',
-      avatar: 'assets/img/icon/avatar.svg'
-    },
-    {
-      nome: 'Nome',
-      usuario: 'Gustavo da Silva Neves 10',
-      imagem: 'assets/img/icon/1142818.jpg',
-      avatar: 'assets/img/icon/avatar.svg'
-    },
-    {
-      nome: 'Nome',
-      usuario: 'Gustavo da Silva Neves 11',
-      imagem: 'assets/img/icon/1142818.jpg',
-      avatar: 'assets/img/icon/avatar.svg'
-    },
-    {
-      nome: 'Nome',
-      usuario: 'Gustavo da Silva Neves 12',
-      imagem: 'assets/img/icon/1142818.jpg',
-      avatar: 'assets/img/icon/avatar.svg'
-    },
-  ];  
+  sections: any[] = [];
+  arquivos: any[] = []
 
+  constructor(private http: HttpClient,
+              private graficoService: GraficoService,
+              private router: Router){
 
+  }
 
+  ngOnInit() {
+    this.http.get<any[]>(`${this.apiURL}/${this.pathListarAquivos}`).subscribe(
+      (arquivos) => {
+        this.sections = arquivos.map(file => ({
+          id: file.id,
+          arquivo: file.pathArquivo,
+          imagem: this.apiURL+"/"+file.pathImagem,
+          titulo: file.titulo,
+          keywords: file.palavrasChave,
+          descricao: file.descricao,
+          data: file.data,
+          hora: file.hora,
+          curtidas: file.curtidas,
+          usuario: file.autorNome,
+          avatar: this.apiURL+"/"+file.pathFotoAutor
+        }));
+
+        for(let i = 0; i < this.sections.length; i++){
+          const strSemEspacos = this.sections[i].keywords.replace(/,/g, '').trim();
+          const palavras = strSemEspacos.split(" ");
+          const hashtags = palavras.map((palavra: any) => `#${palavra}`);
+          this.sections[i].keywords = hashtags.join(" ");
+        }
+      },
+      (error) => {
+        console.error('Erro ao carregar os arquivos:', error);
+      }
+    );
+  }
+
+  
 
   selecionarOpcao(opcao: string) {
     this.opcaoSelecionada = opcao;
@@ -180,5 +79,14 @@ export class FeedComponent {
     }
   }
   
+  graficoSelecionado(grafico: number){
+    for(let i = 0; i < this.sections.length; i++){
+      if(this.sections[i].id === grafico){
+        this.graficoService.passarDados(this.sections[i]);
+        this.encontrado = true;
+      }
+    }
+    this.router.navigate(['/grafico', grafico]);
+  }
   
 }

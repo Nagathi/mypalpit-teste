@@ -2,6 +2,8 @@ import { Component, Injectable } from '@angular/core';
 import { UsuarioService } from '../services/usuario.service';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { environment } from 'environment';
+import { GraficoService } from '../services/grafico.service';
+import { Router } from '@angular/router';
 
 @Injectable()
 @Component({
@@ -10,8 +12,9 @@ import { environment } from 'environment';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent {
-  apiURL = environment.apiURL;
-  pathAttUser = environment.pathAttUser;
+  private readonly apiURL = environment.apiURL;
+  private readonly pathAttUser = environment.pathAttUser;
+  private readonly pathDestaques = environment.pathDestaques;
 
   codigo = this.usuarioService.usuario.codigo;
   foto = this.apiURL + "/" + this.usuarioService.usuario.foto;
@@ -23,17 +26,50 @@ export class ProfileComponent {
   imagemSelecionada: File | null = null;
 
   editar: boolean = false;
+  destaques: any[] = []
 
   constructor(
     private usuarioService: UsuarioService,
     private http: HttpClient,
+    private graficoService: GraficoService,
+    private router: Router
   ) {}
 
   ngOnInit() {
+    this.http.get<any[]>(`${this.apiURL}/${this.pathDestaques}/${this.codigo}`).subscribe(data => {
+      this.destaques = data.map(file => ({
+        id: file.id,
+        arquivo: file.pathArquivo,
+        imagem: this.apiURL+"/"+file.pathImagem,
+        titulo: file.titulo,
+        keywords: file.palavrasChave,
+        descricao: file.descricao,
+        data: file.data,
+        hora: file.hora,
+        curtidas: file.curtidas,
+        usuario: file.autorNome,
+        avatar: this.apiURL+"/"+file.pathFotoAutor
+      }));
+      for(let i = 0; i < this.destaques.length; i++){
+        const strSemEspacos = this.destaques[i].keywords.replace(/,/g, '').trim();
+        const palavras = strSemEspacos.split(" ");
+        const hashtags = palavras.map((palavra: any) => `#${palavra}`);
+        this.destaques[i].keywords = hashtags.join(" ");
+      }
+    });
     this.usuarioService.usuario$.subscribe(data =>
       {
         this.foto = this.apiURL + "/" + data.foto;
       });
+  }
+
+  goToFile(id: number){
+    for(let i = 0; i < this.destaques.length; i++){
+      if(this.destaques[i].id === id){
+        this.graficoService.passarDados(this.destaques[i]);
+      }
+    }
+    this.router.navigate(['/grafico', id]);
   }
 
   onClick() {

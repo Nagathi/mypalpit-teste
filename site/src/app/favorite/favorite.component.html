@@ -13,57 +13,12 @@
         </div>
         
         <div class="imagens">
-            <section id="conteudos" >
-                <a routerLink="/" href="#">
+            <section id="conteudos" *ngFor="let salvo of salvos">
+                <a (click)="goToFile(salvo.id)">
                     <section class="conteudo">
-                        <img class="img-content" src="assets/img/icon/1142818.jpg">
-                        <p class="p-nome">Nome</p>
-                        <div class="p-usuario"><img src="assets/img/icon/avatar.svg"><p>Gustavo da Silva Neves</p></div>
-                    </section>
-                </a>
-            </section>
-            <section id="conteudos" >
-                <a routerLink="/" href="#">
-                    <section class="conteudo">
-                        <img class="img-content" src="assets/img/icon/1142818.jpg">
-                        <p class="p-nome">Nome</p>
-                        <div class="p-usuario"><img src="assets/img/icon/avatar.svg"><p>Gustavo da Silva Neves</p></div>
-                    </section>
-                </a>
-            </section>
-            <section id="conteudos" >
-                <a routerLink="/" href="#">
-                    <section class="conteudo">
-                        <img class="img-content" src="assets/img/icon/1142818.jpg">
-                        <p class="p-nome">Nome</p>
-                        <div class="p-usuario"><img src="assets/img/icon/avatar.svg"><p>Gustavo da Silva Neves</p></div>
-                    </section>
-                </a>
-            </section>
-            <section id="conteudos" >
-                <a routerLink="/" href="#">
-                    <section class="conteudo">
-                        <img class="img-content" src="assets/img/icon/1142818.jpg">
-                        <p class="p-nome">Nome</p>
-                        <div class="p-usuario"><img src="assets/img/icon/avatar.svg"><p>Gustavo da Silva Neves</p></div>
-                    </section>
-                </a>
-            </section>
-            <section id="conteudos" >
-                <a routerLink="/" href="#">
-                    <section class="conteudo">
-                        <img class="img-content" src="assets/img/icon/1142818.jpg">
-                        <p class="p-nome">Nome</p>
-                        <div class="p-usuario"><img src="assets/img/icon/avatar.svg"><p>Gustavo da Silva Neves</p></div>
-                    </section>
-                </a>
-            </section>
-            <section id="conteudos" >
-                <a routerLink="/" href="#">
-                    <section class="conteudo">
-                        <img class="img-content" src="assets/img/icon/1142818.jpg">
-                        <p class="p-nome">Nome</p>
-                        <div class="p-usuario"><img src="assets/img/icon/avatar.svg"><p>Gustavo da Silva Neves</p></div>
+                        <img class="img-content" src="{{salvo.imagem}}">
+                        <p class="p-nome">{{salvo.titulo}}</p>
+                        <div class="p-usuario"><img src="{{salvo.avatar}}"><p>{{salvo.usuario}}</p></div>
                     </section>
                 </a>
             </section>

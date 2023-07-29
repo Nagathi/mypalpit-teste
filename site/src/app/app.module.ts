@@ -10,7 +10,6 @@ import { FooterComponent } from './footer/footer.component';
 import { HomeComponent } from './home/home.component';
 import { FormsModule } from '@angular/forms';
 import { ProfileComponent } from './profile/profile.component';
-import { roteando } from './app.routing';
 import { FavoriteComponent } from './favorite/favorite.component';
 import { ModalCadastroComponent } from './modais/modal-cadastro/modal-cadastro.component';
 import { ModalLoginComponent } from './modais/modal-login/modal-login.component';
@@ -20,7 +19,8 @@ import { UploadDialogComponent } from './eventos/upload-dialog/upload-dialog.com
 import { ModalResponseComponent } from './modais/modal-response/modal-response.component';
 import { ModalInfoComponent } from './modais/modal-info/modal-info.component';
 import { ModalAlterarComponent } from './modais/modal-alterar/modal-alterar.component';
-import { EnvioComponent } from './envio/envio.component'
+import { EnvioComponent } from './envio/envio.component';
+import { GraficoComponent } from './grafico/grafico.component'
 
 @NgModule({
   declarations: [
@@ -39,13 +39,13 @@ import { EnvioComponent } from './envio/envio.component'
     ModalInfoComponent,
     ModalAlterarComponent,
     EnvioComponent,
+    GraficoComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    roteando,
     BrowserAnimationsModule,
   ],
   providers: [

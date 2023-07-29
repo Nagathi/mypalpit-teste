@@ -9,9 +9,6 @@
     padding: 5px 10px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
-.conteudo:hover {
-    transform: scale(0.9);    
-}
 
 .content{
     width: 100%;
@@ -35,6 +32,11 @@
    text-decoration: none;
 }
 
+.content a:hover{
+    transform: scale(0.9);
+    cursor: pointer;
+ }
+
 .img-content{
     width: 250px;
     height: 200px;
@@ -47,6 +49,10 @@
     display: flex;
     width: 100%;
     height: 50px;
+}
+
+.p-usuario img{
+    border-radius: 50%;
 }
 
 h1{

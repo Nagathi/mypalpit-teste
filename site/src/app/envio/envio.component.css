@@ -1,37 +1,132 @@
+
 .geral{
     display: flex;
     position: relative;
-    top: 80px;
-    width: 100%;
-    height: 90vh;
+    top: 55px;
+    width: 95%;
     flex-direction: column;
+    background-color: white;
+    margin: 25px;
+    overflow-y: auto;
 }
 
 .top{
     display: flex;
     width: 100%;
-    height: 70%;
-    background-color: blueviolet;
+    height: 65%;
 }
 
 .bot{
     display: flex;
     width: 100%;
-    height: 30%;
-    background-color: aqua;
+    height: 45%;
+    margin-top: 50px;
+    margin-bottom: 20px;
+    flex-direction: column;
 }
 
 .right-top{
     display: flex;
-    width: 30%;
+    width: 50%;
     height: 100%;
-    background-color: crimson;
-    flex-direction: column;
+    flex-wrap: wrap;
+    margin: 0;
+    justify-content: center;
+    align-items: center;
 }
 
 .left-top{
     display: flex;
-    width: 70%;
+    width: 50%;
     height: 100%;
-    background-color: blue;
+    flex-direction: row;
 }
+
+.item {
+    margin: 0;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+  }
+  
+  .item label {
+    font-weight: bold;
+    margin: 0;
+  }
+  .custom-input {
+    margin-bottom: 0;
+  }  
+
+  .buttons{
+    margin-top: 20px;
+    display: flex;
+    width: 50%;
+    height: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+  }
+
+ 
+
+  .arquivo, .imagem{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .view-image{
+    display: flex;
+    width: 255px;
+    height: 255px;
+  }
+
+  img{
+    margin-top: 20px;
+    margin-left: 20px;
+    width: 250px;
+    height: 250px;
+    border: 3px solid #5d9fcf;
+  }
+
+  span{
+    color: #7e7e7e;
+  }
+
+  th{
+    background-color: #5d9fcf;
+    border-right: 2px solid white;
+    color: white;
+  }
+
+  .custom-file-upload {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #689dd5;
+    width: 200px;
+    height: 80px;
+    background-color: #e1eefd;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+ 
+  .input-file {
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .select{
+    display: flex;
+    width: 100%;
+  }
+
+  .btn-blue{
+    background-color: #e1eefd;
+    color: #689dd5;
+  }

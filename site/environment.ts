@@ -5,6 +5,11 @@ export const environment = {
     pathCadastro: 'cadastrar_usuarios',
     pathAttUser: 'atualizar_usuario',
     pathAttSenha: 'atualizar_senha',
-    pathAttFoto: 'upload'
+    pathAttFoto: 'upload',
+    pathUploadArquivo: 'salvar_arquivo',
+    pathListarAquivos: 'listar',
+    pathSalvos: 'salvos',
+    pathDestaques: 'destaques',
+    pathSalvarArquivo: 'salvar_arquivo'
   };
   

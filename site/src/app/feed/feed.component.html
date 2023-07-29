@@ -14,9 +14,9 @@
     </div>
     <div class="content">
       <section *ngFor="let section of getSectionsPorPagina()" id="conteudos">
-        <a routerLink="/" href="#">
+        <a (click)="graficoSelecionado(section.id)">
           <img class="img-content" [src]="section.imagem">
-          <p class="p-nome">{{ section.nome }}</p>
+          <p class="p-nome">{{ section.titulo }}</p>
           <div class="p-usuario">
             <img [src]="section.avatar">
             <p>{{ section.usuario }}</p>

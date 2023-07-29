@@ -1,5 +1,6 @@
 package br.com.api.controle;
 
+import br.com.api.dto.ArquivoDTO;
 import br.com.api.modelo.UsuarioModelo;
 import br.com.api.service.UsuarioService;
 
@@ -9,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -47,5 +49,17 @@ public class UsuarioControle {
     @PutMapping("/atualizar_senha/{id}")
     public ResponseEntity<?> atualizarSenha(@PathVariable Long id, @RequestBody UsuarioModelo usuarioDTO) {
         return usuarioService.atualizarSenha(id, usuarioDTO);
+    }
+
+    @GetMapping("/salvos/{id}")
+    public ResponseEntity<List<ArquivoDTO>> getArquivosSalvosPorUsuarioId(@PathVariable Long id) {
+        List<ArquivoDTO> arquivosSalvos = usuarioService.getArquivosSalvosPorUsuarioId(id);
+        return ResponseEntity.ok(arquivosSalvos);
+    }
+
+    @PostMapping("/salvar_arquivo")
+    public ResponseEntity<?> salvarArquivo(@RequestParam("arquivo_id") Long arquivoId,
+                                           @RequestParam("usuario_id") Long usuarioId){
+        return usuarioService.salvarArquivo(usuarioId, arquivoId);
     }
 }

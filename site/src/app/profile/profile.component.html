@@ -56,8 +56,21 @@
     <div class="botao-sobreposto">
       <button><img src="assets/img/visual/default.svg"></button>
     </div>
-    <div class="destaque-content">
-      <p>teste</p>
+      <div class="destaque-content">
+        <div class="salvos">
+
+          <div class="imagens">
+              <section id="conteudos" *ngFor="let salvo of destaques">
+                  <a (click)="goToFile(salvo.id)">
+                      <section class="conteudo">
+                          <img class="img-content" src="{{salvo.imagem}}">
+                          <p class="p-nome">{{salvo.titulo}}</p>
+                          <div class="p-usuario"><img src="{{salvo.avatar}}"><p>{{salvo.usuario}}</p></div>
+                      </section>
+                  </a>
+              </section>
+          </div>
+      </div>
     </div>
   </div>
 </div>
