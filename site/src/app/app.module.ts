@@ -3,11 +3,11 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './header/header.component';
-import { FeedComponent } from './feed/feed.component';
-import { ConsultaComponent } from './consulta/consulta.component';
 import { FooterComponent } from './footer/footer.component';
 import { HomeComponent } from './home/home.component';
+import { HeaderComponent } from './home/header/header.component';
+import { FeedComponent } from './home/feed/feed.component';
+import { ConsultaComponent } from './home/consulta/consulta.component';
 import { FormsModule } from '@angular/forms';
 import { ProfileComponent } from './profile/profile.component';
 import { FavoriteComponent } from './favorite/favorite.component';
@@ -20,7 +20,8 @@ import { ModalResponseComponent } from './modais/modal-response/modal-response.c
 import { ModalInfoComponent } from './modais/modal-info/modal-info.component';
 import { ModalAlterarComponent } from './modais/modal-alterar/modal-alterar.component';
 import { EnvioComponent } from './envio/envio.component';
-import { GraficoComponent } from './grafico/grafico.component'
+import { GraficoComponent } from './grafico/grafico.component';
+import { PesquisaComponent } from './pesquisa/pesquisa.component'
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { GraficoComponent } from './grafico/grafico.component'
     ModalAlterarComponent,
     EnvioComponent,
     GraficoComponent,
+    PesquisaComponent,
   ],
   imports: [
     BrowserModule,

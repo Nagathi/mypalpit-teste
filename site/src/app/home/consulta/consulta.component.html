@@ -1,0 +1,27 @@
+<form #pesquisaForm="ngForm" (submit)="submit()">
+  <label for="inputTexto" style="font-weight: bold;">Palavras-chave</label>
+  <input type="text" class="form-control" name="searchTerm" placeholder="Pesquisar" [(ngModel)]="searchTerm">
+
+  <p style="font-weight: bold;" for="selecaoAtributos">Disciplina</p>
+  <select class="form-select form-control" [(ngModel)]="opcaoSelecionada" name="selecaoAtributos">
+    <option value="Biologia">Biologia</option>
+    <option value="Física">Física</option>
+    <option value="Geografia">Geografia</option>
+    <option value="História">História</option>
+    <option value="Informática">Informática</option>
+    <option value="Inglês">Inglês</option>
+    <option value="Matemática">Matemática</option>
+    <option value="Português">Português</option>
+    <option value="Química">Química</option>
+    <option value="Todas">Todas</option>
+  </select>
+
+  <p style="font-weight: bold;">Grau de Escolaridade</p>
+  <label for="checkbox1"><input type="checkbox" id="checkbox1" name="opcao1" [(ngModel)]="opcao1" value="true"> Ensino Fundamental I</label><br>
+  <label for="checkbox2"><input type="checkbox" id="checkbox2" name="opcao2" [(ngModel)]="opcao2" value="true"> Ensino Fundamental II</label><br>
+  <label for="checkbox3"><input type="checkbox" id="checkbox3" name="opcao3" [(ngModel)]="opcao3" value="true"> Ensino Médio</label><br>
+  <label for="checkbox4"><input type="checkbox" id="checkbox4" name="opcao4" [(ngModel)]="opcao4" value="true"> Ensino Superior</label><br>
+
+  <button type="submit" class="btn btn-primary w-100"><img src="assets/img/icon/search-icon.svg"><span>Pesquisar</span></button>
+</form>
+

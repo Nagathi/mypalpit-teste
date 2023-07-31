@@ -1,5 +1,8 @@
 package br.com.api.dto;
 
+import java.util.List;
+
+import br.com.api.modelo.PalavrasModelo;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,6 +18,10 @@ public class ArquivoDTO {
     private String hora;
     private int curtidas;
     private String titulo;
+   
     private String autorNome;
     private String pathFotoAutor;
+
+    private List<PalavrasModelo> keywords;
+
 }

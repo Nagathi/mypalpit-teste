@@ -37,25 +37,25 @@ export class ProfileComponent {
 
   ngOnInit() {
     this.http.get<any[]>(`${this.apiURL}/${this.pathDestaques}/${this.codigo}`).subscribe(data => {
-      this.destaques = data.map(file => ({
-        id: file.id,
-        arquivo: file.pathArquivo,
-        imagem: this.apiURL+"/"+file.pathImagem,
-        titulo: file.titulo,
-        keywords: file.palavrasChave,
-        descricao: file.descricao,
-        data: file.data,
-        hora: file.hora,
-        curtidas: file.curtidas,
-        usuario: file.autorNome,
-        avatar: this.apiURL+"/"+file.pathFotoAutor
-      }));
-      for(let i = 0; i < this.destaques.length; i++){
-        const strSemEspacos = this.destaques[i].keywords.replace(/,/g, '').trim();
-        const palavras = strSemEspacos.split(" ");
-        const hashtags = palavras.map((palavra: any) => `#${palavra}`);
-        this.destaques[i].keywords = hashtags.join(" ");
-      }
+      this.destaques = data.map(file => {
+        const formattedKeywords = Array.isArray(file.keywords)
+          ? file.keywords.map((keyword: any) => `#${keyword.palavra}`)
+          : [];
+
+        return {
+          id: file.id,
+          arquivo: file.pathArquivo,
+          imagem: this.apiURL+"/"+file.pathImagem,
+          titulo: file.titulo,
+          keywords: formattedKeywords,
+          descricao: file.descricao,
+          data: file.data,
+          hora: file.hora,
+          curtidas: file.curtidas,
+          usuario: file.autorNome,
+          avatar: this.apiURL+"/"+file.pathFotoAutor
+        };
+      });
     });
     this.usuarioService.usuario$.subscribe(data =>
       {
@@ -115,5 +115,9 @@ export class ProfileComponent {
         }
       }
     );
+  }
+
+  goToNovoEnvio(){
+    this.router.navigate(['/envio']);
   }
 }

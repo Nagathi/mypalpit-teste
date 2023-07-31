@@ -19,6 +19,7 @@ export class EnvioComponent {
   nivel: string = 'Fundamental I';
   disciplina: string = 'Biologia';
   materias: any[] = [];
+  keywords: any[] = [];
   niveis: any[] = [];
   disciplinas: any[] = []
 
@@ -27,7 +28,7 @@ export class EnvioComponent {
   imagem!: File;
   arquivo!: File;
   titulo: string = '';
-  keywords: string = ''
+  palavras: string = ''
   descricao: string = ''
   materias_str: string = ''
 
@@ -85,6 +86,9 @@ export class EnvioComponent {
   
   salvarArquivo(){
 
+    this.keywords = this.palavras.split(", ");
+    const keywordsArray = this.keywords.map(palavra => ({ palavra }));
+    
     const dataAtual = new Date();
     const data = `${dataAtual.getDate().toString().padStart(2, '0')}-${(dataAtual.getMonth() + 1).toString().padStart(2, '0')}-${dataAtual.getFullYear()}`;
     const hora = `${dataAtual.getHours().toString().padStart(2, '0')}:${dataAtual.getMinutes().toString().padStart(2, '0')}`;
@@ -93,17 +97,15 @@ export class EnvioComponent {
     formData.append('file', this.arquivo);
     formData.append('image', this.imagem);
     formData.append('titulo', this.titulo);
-    formData.append('keywords', this.keywords);
     formData.append('descricao', this.descricao);
     formData.append('autor', this.userService.usuario.codigo);
-    formData.append('materias', JSON.stringify(this.materias));
     formData.append('data', data);
     formData.append('hora', hora);
+    formData.append('materias', JSON.stringify(this.materias));
+    formData.append('keywords', JSON.stringify(keywordsArray));
 
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'multipart/form-data');
-
-    console.log(JSON.stringify(this.materias));
 
     this.http.post<any>(`${this.apiURL}/${this.pathUploadArquivo}`, formData, { headers }).subscribe(
       (response: any) => {

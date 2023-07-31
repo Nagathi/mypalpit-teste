@@ -26,7 +26,6 @@ public class ArquivoModelo {
     private String pathArquivo;
     private String pathImagem;
     private String titulo;
-    private String palavrasChave;
     private String descricao;
     private String data;
     private String hora;
@@ -35,6 +34,10 @@ public class ArquivoModelo {
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "arquivo_id")
     private List<MateriaModelo> materias;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "arquivo_id")
+    private List<PalavrasModelo> palavras;
 
     @ManyToOne
     @JoinColumn(name = "autor_codigo")

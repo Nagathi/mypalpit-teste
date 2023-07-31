@@ -10,6 +10,7 @@ export const environment = {
     pathListarAquivos: 'listar',
     pathSalvos: 'salvos',
     pathDestaques: 'destaques',
-    pathSalvarArquivo: 'salvar_arquivo'
+    pathSalvarArquivo: 'salvar_arquivo',
+    pathBusca: 'pesquisar'
   };
   

@@ -5,16 +5,22 @@ import { ProfileComponent } from './profile/profile.component';
 import { FavoriteComponent } from './favorite/favorite.component';
 import { EnvioComponent } from './envio/envio.component';
 import { GraficoComponent } from './grafico/grafico.component';
+import { FeedComponent } from './home/feed/feed.component';
+import { PesquisaComponent } from './pesquisa/pesquisa.component';
 const routes: Routes = [
   {
-    path: '',
-    component: HomeComponent,
+    path: '', component: HomeComponent, children: [
+      { path: '', component: FeedComponent },
+      { path: 'busca', component: PesquisaComponent },
+    ],
     data: { title: 'Palpit' }
   },
   {
-      path: 'home',
-      component: HomeComponent,
-      data: { title: 'Palpit' }
+    path: 'home', component: HomeComponent, children: [
+      { path: '', component: FeedComponent },
+      { path: 'busca', component: PesquisaComponent },
+    ],
+    data: { title: 'Palpit' }
   },
   {
       path: 'perfil',

@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { environment } from 'environment';
-import { GraficoService } from '../services/grafico.service';
 import { Router } from '@angular/router';
+import { GraficoService } from 'src/app/services/grafico.service';
 
 
 @Component({
@@ -30,26 +30,25 @@ export class FeedComponent {
   ngOnInit() {
     this.http.get<any[]>(`${this.apiURL}/${this.pathListarAquivos}`).subscribe(
       (arquivos) => {
-        this.sections = arquivos.map(file => ({
-          id: file.id,
-          arquivo: file.pathArquivo,
-          imagem: this.apiURL+"/"+file.pathImagem,
-          titulo: file.titulo,
-          keywords: file.palavrasChave,
-          descricao: file.descricao,
-          data: file.data,
-          hora: file.hora,
-          curtidas: file.curtidas,
-          usuario: file.autorNome,
-          avatar: this.apiURL+"/"+file.pathFotoAutor
-        }));
+        this.sections = arquivos.map(file => {
+          const formattedKeywords = Array.isArray(file.keywords)
+            ? file.keywords.map((keyword: any) => `#${keyword.palavra}`)
+            : [];
 
-        for(let i = 0; i < this.sections.length; i++){
-          const strSemEspacos = this.sections[i].keywords.replace(/,/g, '').trim();
-          const palavras = strSemEspacos.split(" ");
-          const hashtags = palavras.map((palavra: any) => `#${palavra}`);
-          this.sections[i].keywords = hashtags.join(" ");
-        }
+          return {
+            id: file.id,
+            arquivo: file.pathArquivo,
+            imagem: this.apiURL+"/"+file.pathImagem,
+            titulo: file.titulo,
+            keywords: formattedKeywords,
+            descricao: file.descricao,
+            data: file.data,
+            hora: file.hora,
+            curtidas: file.curtidas,
+            usuario: file.autorNome,
+            avatar: this.apiURL+"/"+file.pathFotoAutor
+          };
+        });
       },
       (error) => {
         console.error('Erro ao carregar os arquivos:', error);

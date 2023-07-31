@@ -20,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import br.com.api.dto.ArquivoDTO;
 import br.com.api.modelo.ArquivoModelo;
 import br.com.api.modelo.MateriaModelo;
+import br.com.api.modelo.PalavrasModelo;
 import br.com.api.service.ArquivoService;
 
 @RestController
@@ -39,10 +40,10 @@ public class ArquivoControle {
             dto.setPathArquivo(arquivo.getPathArquivo());
             dto.setPathImagem(arquivo.getPathImagem());
             dto.setTitulo(arquivo.getTitulo());
-            dto.setPalavrasChave(arquivo.getPalavrasChave());
             dto.setDescricao(arquivo.getDescricao());
             dto.setAutorNome(arquivo.getUsuario().getNome());
             dto.setPathFotoAutor(arquivo.getUsuario().getFoto());
+            dto.setKeywords(arquivo.getPalavras());
             arquivosDTO.add(dto);
         }
 
@@ -54,17 +55,19 @@ public class ArquivoControle {
                                                 @RequestPart("file") MultipartFile file,
                                                 @RequestPart("image") MultipartFile image,
                                                 @RequestParam("titulo") String titulo,
-                                                @RequestParam("keywords") String keywords,
                                                 @RequestParam("descricao") String descricao,
                                                 @RequestParam("data") String data,
                                                 @RequestParam("hora") String hora,
                                                 @RequestParam("autor") Long autorId,
-                                                @RequestParam("materias") String materiasJson){
+                                                @RequestParam("materias") String materiasJson,
+                                                @RequestParam("keywords") String palavrasJson){
         try {
             ObjectMapper objectMapper = new ObjectMapper();
             List<MateriaModelo> materias = objectMapper.readValue(materiasJson, new TypeReference<List<MateriaModelo>>(){});
-            return arquivoService.salvarArquivo(file, image,  titulo, keywords, descricao, data, hora, autorId, materias);  
+            List<PalavrasModelo> palavras = objectMapper.readValue(palavrasJson, new TypeReference<List<PalavrasModelo>>(){});
+            return arquivoService.salvarArquivo(file, image,  titulo, descricao, data, hora, autorId, materias, palavras);  
         }catch(Exception e){
+            System.out.println(e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao processar a requisição.");
         }
     }
@@ -73,5 +76,21 @@ public class ArquivoControle {
     public ResponseEntity<List<ArquivoDTO>> getArquivosSalvosPorUsuarioId(@PathVariable Long id) {
         List<ArquivoDTO> arquivosSalvos = arquivoService.getDestaquesPorId(id);
         return ResponseEntity.ok(arquivosSalvos);
+    }
+
+    @GetMapping("/pesquisar")
+    public ResponseEntity<List<ArquivoModelo>> pesquisarArquivos(
+            @RequestParam(value = "palavrasChave", required = false) List<String> palavrasChave,
+            @RequestParam(value = "disciplina", required = false) String disciplina,
+            @RequestParam(value = "nivel", required = false) List<String> nivel
+    ) {
+
+        List<ArquivoModelo> arquivos = arquivoService.pesquisarArquivos(palavrasChave, disciplina, nivel);
+
+        if (arquivos.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.ok(arquivos);
+        }
     }
 }

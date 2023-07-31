@@ -118,14 +118,13 @@ public class UsuarioService {
             UsuarioModelo usuario = new UsuarioModelo();
             usuario.setCodigo(usuarioId);
             List<SalvoModelo> salvos = salvoRepository.findSalvosByUsuario(usuario);
-            List<ArquivoDTO> arquivosSalvos = new ArrayList<>();
+            List<ArquivoDTO> arquivosSalvos = new ArrayList<ArquivoDTO>();
 
             for (SalvoModelo salvo : salvos) {
                 ArquivoDTO dto = new ArquivoDTO();
                 dto.setId(salvo.getArquivo().getId());
                 dto.setPathArquivo(salvo.getArquivo().getPathArquivo());
                 dto.setPathImagem(salvo.getArquivo().getPathImagem());
-                dto.setPalavrasChave(salvo.getArquivo().getPalavrasChave());
                 dto.setDescricao(salvo.getArquivo().getDescricao());
                 dto.setData(salvo.getArquivo().getData());
                 dto.setHora(salvo.getArquivo().getHora());
@@ -133,6 +132,7 @@ public class UsuarioService {
                 dto.setTitulo(salvo.getArquivo().getTitulo());
                 dto.setAutorNome(salvo.getArquivo().getUsuario().getNome());
                 dto.setPathFotoAutor(salvo.getArquivo().getUsuario().getFoto());
+                dto.setKeywords(salvo.getArquivo().getPalavras());
                 arquivosSalvos.add(dto);
             }
 

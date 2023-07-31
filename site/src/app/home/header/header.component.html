@@ -1,7 +1,7 @@
 <header class="header-home">
     <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
       <div class="container-fluid">
-        <a class="navbar-brand" routerLink="home"><img class="nav-item" src="assets/img/icon/logo_home.svg"></a>
+        <a class="navbar-brand" [routerLink]="['/']"><img class="nav-item" src="assets/img/icon/logo_home.svg"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
           aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -16,7 +16,7 @@
               </form>
             </li>
             <li class="nav-item" *ngIf="logged">
-              <a class="nav-link" [routerLink]="['/home']"><img src="assets/img/icon/home.svg"><span>Início</span></a>
+              <a class="nav-link" [routerLink]="['']"><img src="assets/img/icon/home.svg"><span>Início</span></a>
             </li>
             <li class="nav-item" *ngIf="logged">
               <a class="nav-link" [routerLink]="['/perfil']"><img src="assets/img/icon/perfil.svg"><span>Perfil</span></a>
@@ -40,7 +40,7 @@
             </li>
             <li class="nav-item" *ngIf="logged">
               <label for="selecaoAtributos" class="select-image-label" (click)="alternarOpcoes()">
-                <img src="assets/uploads/perfil/avatar.svg" class="select-icon">
+                <img src="{{avatar}}" class="select-icon">
                 <div class="custom-select">
                   <ul class="options-list" [ngClass]="{ 'show-options': mostrarOpcoes }">
                     <li class="list">
