@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import br.com.api.dto.ArquivoDTO;
 import br.com.api.modelo.ArquivoModelo;
+import br.com.api.modelo.ComentarioModelo;
 import br.com.api.modelo.MateriaModelo;
 import br.com.api.modelo.PalavrasModelo;
 import br.com.api.service.ArquivoService;
@@ -78,7 +79,7 @@ public class ArquivoControle {
         return ResponseEntity.ok(arquivosSalvos);
     }
 
-    @GetMapping("/pesquisar")
+    @GetMapping("/consulta")
     public ResponseEntity<List<ArquivoModelo>> pesquisarArquivos(
             @RequestParam(value = "palavrasChave", required = false) List<String> palavrasChave,
             @RequestParam(value = "disciplina", required = false) String disciplina,
@@ -92,5 +93,32 @@ public class ArquivoControle {
         } else {
             return ResponseEntity.ok(arquivos);
         }
+    }
+
+    @GetMapping("/pesquisar")
+    public ResponseEntity<List<ArquivoModelo>> buscarArquivosPorKeyword(@RequestParam("palavra") String palavra) {
+        List<ArquivoModelo> arquivos = arquivoService.buscarArquivosPorKeyword(palavra);
+        if (arquivos.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.ok(arquivos);
+        }
+    }
+
+    @PostMapping("/comentar")
+    public ResponseEntity<?> enviarComentario(@RequestParam("arquivo") Long arquivoId,
+                                              @RequestParam("usuario") Long usuarioId,
+                                              @RequestParam("descricao") String descricao){
+        return arquivoService.comentar(arquivoId, usuarioId, descricao);
+    }
+
+    @GetMapping("/listar_comentarios")
+    public List<ComentarioModelo> listarComentarios(@RequestParam("arquivo") Long arquivoId){
+        return arquivoService.listarComentariosPorIdArquivo(arquivoId);
+    }
+
+    @PostMapping("/curtir")
+    public ResponseEntity<?> curtir(@RequestParam("arquivo") Long arquivoId){
+        return arquivoService.curtirGrafico(arquivoId);
     }
 }

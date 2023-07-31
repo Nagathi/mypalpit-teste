@@ -11,6 +11,7 @@ export const environment = {
     pathSalvos: 'salvos',
     pathDestaques: 'destaques',
     pathSalvarArquivo: 'salvar_arquivo',
-    pathBusca: 'pesquisar'
+    pathBusca: 'consulta',
+    pathPesquisar: 'pesquisar',
   };
   

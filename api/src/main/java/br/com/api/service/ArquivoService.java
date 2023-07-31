@@ -19,10 +19,12 @@ import org.springframework.web.multipart.MultipartFile;
 
 import br.com.api.dto.ArquivoDTO;
 import br.com.api.modelo.ArquivoModelo;
+import br.com.api.modelo.ComentarioModelo;
 import br.com.api.modelo.MateriaModelo;
 import br.com.api.modelo.PalavrasModelo;
 import br.com.api.modelo.UsuarioModelo;
 import br.com.api.repositorio.ArquivoRepositorio;
+import br.com.api.repositorio.ComentarioRepositorio;
 import br.com.api.repositorio.UsuarioRepositorio;
 
 @Service
@@ -33,6 +35,9 @@ public class ArquivoService {
 
     @Autowired
     private UsuarioRepositorio usuarioRepositorio;
+
+    @Autowired 
+    private ComentarioRepositorio comentarioRepositorio;
 
     public Iterable<ArquivoModelo> listarArquivos(){
         return arquivoRepositorio.findAll();
@@ -127,5 +132,43 @@ public class ArquivoService {
         return StreamSupport.stream(iterable.spliterator(), false)
                 .collect(Collectors.toList());
     }
+
+   public ResponseEntity<?> comentar(Long arquivoId, Long usuarioId, String descricao){
+        Optional<ArquivoModelo> arquivoOptional = arquivoRepositorio.findById(arquivoId);
+        Optional<UsuarioModelo> usuarioOptional = usuarioRepositorio.findById(usuarioId);
+
+        if (arquivoOptional.isPresent() && usuarioOptional.isPresent()) {
+            ArquivoModelo arquivo = arquivoOptional.get();
+            UsuarioModelo usuario = usuarioOptional.get();
+            ComentarioModelo comentario = new ComentarioModelo();
+            comentario.setDescricao(descricao);
+            comentario.setArquivo(arquivo);
+            comentario.setUsuario(usuario);
+            comentarioRepositorio.save(comentario);
+            return ResponseEntity.ok(comentario);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+   }
+
+   public List<ComentarioModelo> listarComentariosPorIdArquivo(Long arquivoId){
+        return comentarioRepositorio.findByArquivoId(arquivoId);
+   }
+
+   public ResponseEntity<?> curtirGrafico(Long arquivoId){
+        Optional<ArquivoModelo> arquivoOptional = arquivoRepositorio.findById(arquivoId);
+        ArquivoModelo arquivo = arquivoOptional.get();
+        if(arquivoOptional.isPresent()){
+            arquivo.setCurtidas(arquivo.getCurtidas()+1);
+            arquivoRepositorio.save(arquivo);
+            return ResponseEntity.ok().build();
+        }else{
+            return ResponseEntity.notFound().build();
+        }
+   }
+
+   public List<ArquivoModelo> buscarArquivosPorKeyword(String palavra) {
+        return arquivoRepositorio.findByKeyword(palavra);
+   }
 
 }
