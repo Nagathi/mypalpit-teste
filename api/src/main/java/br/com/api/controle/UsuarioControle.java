@@ -62,4 +62,10 @@ public class UsuarioControle {
                                            @RequestParam("usuario_id") Long usuarioId){
         return usuarioService.salvarArquivo(usuarioId, arquivoId);
     }
+
+    @PostMapping("/curtir")
+    public ResponseEntity<?> curtir(@RequestParam("arquivo") Long arquivoId,
+                                    @RequestParam("usuario") Long usuarioId){
+        return usuarioService.getCurtirStatus(arquivoId, usuarioId);
+    }
 }

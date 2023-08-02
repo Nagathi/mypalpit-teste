@@ -27,6 +27,7 @@ export class GraficoComponent {
     this.graficoService.grafico$.subscribe(
       (graficoAtualizado: any) => {
         this.grafico = graficoAtualizado;
+        console.log(this.grafico)
       }
     );
     this.http.get<any[]>(`${this.apiURL}/${this.pathListarComentarios}?arquivo=${this.grafico.id}`).subscribe((data) => {

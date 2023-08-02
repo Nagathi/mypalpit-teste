@@ -48,6 +48,7 @@ public class ArquivoControle {
             dto.setPathFotoAutor(arquivo.getUsuario().getFoto());
             dto.setCurtidas(arquivo.getCurtidas());
             dto.setHora(arquivo.getHora());
+            dto.setKeywords(arquivo.getPalavras());
             arquivosDTO.add(dto);
         }
 
@@ -99,8 +100,8 @@ public class ArquivoControle {
     }
 
     @GetMapping("/pesquisar")
-    public ResponseEntity<List<ArquivoModelo>> buscarArquivosPorKeyword(@RequestParam("palavra") String palavra) {
-        List<ArquivoModelo> arquivos = arquivoService.buscarArquivosPorKeyword(palavra);
+    public ResponseEntity<List<ArquivoDTO>> buscarArquivosPorKeyword(@RequestParam("palavra") String palavra) {
+        List<ArquivoDTO> arquivos = arquivoService.buscarArquivosPorKeyword(palavra);
         if (arquivos.isEmpty()) {
             return ResponseEntity.noContent().build();
         } else {
@@ -118,10 +119,5 @@ public class ArquivoControle {
     @GetMapping("/listar_comentarios")
     public List<ComentarioDTO> listarComentarios(@RequestParam("arquivo") Long arquivoId){
         return arquivoService.listarComentariosPorIdArquivo(arquivoId);
-    }
-
-    @PostMapping("/curtir")
-    public ResponseEntity<?> curtir(@RequestParam("arquivo") Long arquivoId){
-        return arquivoService.curtirGrafico(arquivoId);
     }
 }

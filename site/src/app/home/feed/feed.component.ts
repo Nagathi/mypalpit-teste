@@ -29,6 +29,7 @@ export class FeedComponent {
   ngOnInit() {
     this.http.get<any[]>(`${this.apiURL}/${this.pathListarAquivos}`).subscribe(
       (arquivos) => {
+        console.log(arquivos)
         this.graficos = arquivos.map(file => {
           const formattedKeywords = Array.isArray(file.keywords)
             ? file.keywords.map((keyword: any) => `#${keyword.palavra}`)

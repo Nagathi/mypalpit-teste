@@ -15,8 +15,8 @@ export class ModalLoginComponent {
   private readonly pathLogin = environment.pathLogin;
 
   modalAberto: boolean = false;
-  email: string = 'ragbr7070@gmail.com';
-  senha: string = 'allspark1';
+  email: string = '';
+  senha: string = '';
   errorMessage = '';
   error: boolean = false;
 

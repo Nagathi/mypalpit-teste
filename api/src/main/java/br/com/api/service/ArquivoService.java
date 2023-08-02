@@ -186,20 +186,26 @@ public class ArquivoService {
         return comentariosDTO;
   }
 
-   public ResponseEntity<?> curtirGrafico(Long arquivoId){
-        Optional<ArquivoModelo> arquivoOptional = arquivoRepositorio.findById(arquivoId);
-        ArquivoModelo arquivo = arquivoOptional.get();
-        if(arquivoOptional.isPresent()){
-            arquivo.setCurtidas(arquivo.getCurtidas()+1);
-            arquivoRepositorio.save(arquivo);
-            return ResponseEntity.ok().build();
-        }else{
-            return ResponseEntity.notFound().build();
+   public List<ArquivoDTO> buscarArquivosPorKeyword(String palavra) {
+        List<ArquivoModelo> arquivos = arquivoRepositorio.findByKeyword(palavra);;
+        List<ArquivoDTO> arquivosDTO = new ArrayList<>();
+
+        for(ArquivoModelo arquivo : arquivos){
+            ArquivoDTO dto = new ArquivoDTO();
+            dto.setId(arquivo.getId());
+            dto.setPathArquivo(arquivo.getPathArquivo());
+            dto.setPathImagem(arquivo.getPathImagem());            
+            dto.setDescricao(arquivo.getDescricao());
+            dto.setData(arquivo.getData());
+            dto.setHora(arquivo.getHora());
+            dto.setCurtidas(arquivo.getCurtidas());
+            dto.setTitulo(arquivo.getTitulo());
+            dto.setAutorNome(arquivo.getUsuario().getNome());
+            dto.setPathFotoAutor(arquivo.getUsuario().getFoto());
+            dto.setKeywords(arquivo.getPalavras());
+            arquivosDTO.add(dto);
         }
-   }
-
-   public List<ArquivoModelo> buscarArquivosPorKeyword(String palavra) {
-        return arquivoRepositorio.findByKeyword(palavra);
-   }
-
+        return arquivosDTO;
+    }
 }
+
