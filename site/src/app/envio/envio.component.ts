@@ -18,10 +18,11 @@ export class EnvioComponent {
   nomeArquivo: string = 'Nenhum arquivo selecionado';
   nivel: string = 'Fundamental I';
   disciplina: string = 'Biologia';
+  change: boolean = false;
   materias: any[] = [];
   keywords: any[] = [];
   niveis: any[] = [];
-  disciplinas: any[] = []
+  disciplinas: any[] = [];
 
   imagemPreview!: SafeUrl;
 
@@ -110,6 +111,11 @@ export class EnvioComponent {
     this.http.post<any>(`${this.apiURL}/${this.pathUploadArquivo}`, formData, { headers }).subscribe(
       (response: any) => {
         console.log('Arquivo salvo com sucesso!', response);
+        this.titulo = '';
+        this.palavras = ''
+        this.descricao = ''
+        this.materias_str = ''
+        this.materias = [];
       },
       (error: any) => {
         console.error('Erro ao salvar o arquivo:', error);
@@ -119,6 +125,16 @@ export class EnvioComponent {
 
   goToHome() {
     this.router.navigate(['/home']);
+  }
+
+  onChangeMais(){
+    this.change = true;
+    this.disciplina = '';
+  }
+
+  onChangeMenos(){
+    this.change = false;
+    this.disciplina = 'Biologia';
   }
 
 }

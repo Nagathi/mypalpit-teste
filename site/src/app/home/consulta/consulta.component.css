@@ -1,0 +1,46 @@
+.geral{
+    top: 80px;
+    position: relative;
+    width: 100%;
+}
+
+.formulario{
+    width: 100%;
+    background-color: #fff;
+}
+
+.formulario form{
+    margin-left: 15px;
+    margin-right: 15px;
+    margin-bottom: 15px;
+}
+
+.info{
+    width: 100%;
+    background-color: #fff;
+    margin-top: 30px;
+}
+
+.grafico{
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+}
+
+.downloads{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+.info a, h2{
+    margin-left: 15px;
+}
+
+h2{
+    font-size: 18px
+}

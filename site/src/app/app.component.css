@@ -4,8 +4,3 @@
     min-height: 100vh;
     background-color: #e1eefd;
   }
-  
-  app-header,
-  app-footer {
-    flex: 0 0 auto;
-  }

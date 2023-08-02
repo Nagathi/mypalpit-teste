@@ -1,28 +1,38 @@
 <div class="content">
     <div class="filtro">
-        <select class="form-select form-control" [(ngModel)]="opcaoSelecionada" name="selecaoAtributos">
-            <option value="Novos">Novos</option>
-            <option value="Antigos">Antigos</option>
-            <option value="Populares">Populares</option>
-          </select>
+      <select class="form-select form-control" [(ngModel)]="opcaoSelecionada" name="selecaoAtributos" (change)="selecionarOpcao(opcaoSelecionada)">
+        <option value="Novos">Novos</option>
+        <option value="Antigos">Antigos</option>
+        <option value="Populares">Populares</option>
+      </select>
     </div>
     <div class="salvos">
-
-        <div class="titulo">
-            <h1 style="font-size: 22px; margin-top: 10px; margin-left: 10px;">Seus favoritos ({{qtdFavoritos}})</h1>
-        </div>
-        
-        <div class="imagens">
-            <section id="conteudos" *ngFor="let salvo of salvos">
-                <a (click)="goToFile(salvo.id)">
-                    <section class="conteudo">
-                        <img class="img-content" src="{{salvo.imagem}}">
-                        <p class="p-nome">{{salvo.titulo}}</p>
-                        <div class="p-usuario"><img src="{{salvo.avatar}}"><p>{{salvo.usuario}}</p></div>
-                    </section>
-                </a>
-            </section>
-        </div>
+      <div class="titulo">
+        <h1 class="titulo-favoritos">Seus favoritos ({{qtdFavoritos}})</h1>
+      </div>
+      <div class="imagens">
+        <section id="conteudos" *ngFor="let grafico of getSectionsPorPagina()">
+          <a (click)="goToFile(grafico.id)">
+            <div class="conteudo">
+              <img class="img-content" src="{{grafico.imagem}}">
+              <p class="p-nome">{{grafico.titulo}}</p>
+              <div class="p-usuario">
+                <img src="{{grafico.avatar}}">
+                <p>{{grafico.usuario}}</p>
+              </div>
+            </div>
+          </a>
+        </section>
+      </div>
+      <div class="pagination">
+        <button class="page-button" [disabled]="paginaAtual === 1" (click)="mudarPagina(paginaAtual - 1)">
+          Anterior
+        </button>
+        <span>{{ paginaAtual }} de {{ totalPaginas() }}</span>
+        <button class="page-button" [disabled]="paginaAtual === totalPaginas()" (click)="mudarPagina(paginaAtual + 1)">
+          Próxima
+        </button>
+      </div>
     </div>
-</div>
-
+  </div>
+  

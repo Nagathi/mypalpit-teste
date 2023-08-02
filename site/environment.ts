@@ -13,5 +13,7 @@ export const environment = {
     pathSalvarArquivo: 'salvar_arquivo',
     pathBusca: 'consulta',
     pathPesquisar: 'pesquisar',
+    pathComentar: 'comentar',
+    pathListarComentarios: 'listar_comentarios'
   };
   

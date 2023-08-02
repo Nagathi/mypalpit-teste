@@ -1,4 +1,4 @@
-import { Component, Injectable } from '@angular/core';
+import { Component, HostListener, Injectable } from '@angular/core';
 import { UsuarioService } from '../services/usuario.service';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { environment } from 'environment';
@@ -26,8 +26,9 @@ export class ProfileComponent {
   imagemSelecionada: File | null = null;
 
   editar: boolean = false;
-  destaques: any[] = []
-
+  graficos: any[] = []
+  itensPorPagina = 6;
+  paginaAtual = 1;
   constructor(
     private usuarioService: UsuarioService,
     private http: HttpClient,
@@ -37,7 +38,7 @@ export class ProfileComponent {
 
   ngOnInit() {
     this.http.get<any[]>(`${this.apiURL}/${this.pathDestaques}/${this.codigo}`).subscribe(data => {
-      this.destaques = data.map(file => {
+      this.graficos = data.map(file => {
         const formattedKeywords = Array.isArray(file.keywords)
           ? file.keywords.map((keyword: any) => `#${keyword.palavra}`)
           : [];
@@ -56,6 +57,7 @@ export class ProfileComponent {
           avatar: this.apiURL+"/"+file.pathFotoAutor
         };
       });
+      this.graficos.sort((a, b) => b.id - a.id);
     });
     this.usuarioService.usuario$.subscribe(data =>
       {
@@ -64,9 +66,9 @@ export class ProfileComponent {
   }
 
   goToFile(id: number){
-    for(let i = 0; i < this.destaques.length; i++){
-      if(this.destaques[i].id === id){
-        this.graficoService.passarDados(this.destaques[i]);
+    for(let i = 0; i < this.graficos.length; i++){
+      if(this.graficos[i].id === id){
+        this.graficoService.passarDados(this.graficos[i]);
       }
     }
     this.router.navigate(['/grafico', id]);
@@ -117,6 +119,21 @@ export class ProfileComponent {
     );
   }
 
+  getSectionsPorPagina(): any[] {
+    const inicio = (this.paginaAtual - 1) * this.itensPorPagina;
+    const fim = inicio + this.itensPorPagina;
+    return this.graficos.slice(inicio, fim);
+  }
+
+  totalPaginas(): number {
+    return Math.ceil(this.graficos.length / this.itensPorPagina);
+  }
+  
+  mudarPagina(pagina: number): void {
+    if (pagina >= 1 && pagina <= this.totalPaginas()) {
+      this.paginaAtual = pagina;
+    }
+  }
   goToNovoEnvio(){
     this.router.navigate(['/envio']);
   }

@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { environment } from 'environment';
 import { Router } from '@angular/router';
 import { GraficoService } from 'src/app/services/grafico.service';
@@ -14,11 +14,10 @@ export class FeedComponent {
   private readonly apiURL = environment.apiURL;
   private readonly pathListarAquivos = environment.pathListarAquivos;
 
-  encontrado: boolean = false;
   opcaoSelecionada: string = 'Novos';
   itensPorPagina = 6;
   paginaAtual = 1;
-  sections: any[] = [];
+  graficos: any[] = [];
   arquivos: any[] = []
 
   constructor(private http: HttpClient,
@@ -30,7 +29,7 @@ export class FeedComponent {
   ngOnInit() {
     this.http.get<any[]>(`${this.apiURL}/${this.pathListarAquivos}`).subscribe(
       (arquivos) => {
-        this.sections = arquivos.map(file => {
+        this.graficos = arquivos.map(file => {
           const formattedKeywords = Array.isArray(file.keywords)
             ? file.keywords.map((keyword: any) => `#${keyword.palavra}`)
             : [];
@@ -49,6 +48,8 @@ export class FeedComponent {
             avatar: this.apiURL+"/"+file.pathFotoAutor
           };
         });
+
+        this.graficos.sort((a, b) => b.id - a.id);
       },
       (error) => {
         console.error('Erro ao carregar os arquivos:', error);
@@ -56,20 +57,29 @@ export class FeedComponent {
     );
   }
 
-  
+  reordenarArray() {
+    if (this.opcaoSelecionada === 'Novos') {
+      this.graficos.sort((a, b) => b.id - a.id);
+    } else if (this.opcaoSelecionada === 'Antigos') {
+      this.graficos.sort((a, b) => a.id - b.id);
+    } else if (this.opcaoSelecionada === 'Populares') {
+      this.graficos.sort((a, b) => b.curtidas - a.curtidas);
+    }
+  }  
 
   selecionarOpcao(opcao: string) {
     this.opcaoSelecionada = opcao;
-  }
+    this.reordenarArray();
+  }  
 
   getSectionsPorPagina(): any[] {
     const inicio = (this.paginaAtual - 1) * this.itensPorPagina;
     const fim = inicio + this.itensPorPagina;
-    return this.sections.slice(inicio, fim);
+    return this.graficos.slice(inicio, fim);
   }
 
   totalPaginas(): number {
-    return Math.ceil(this.sections.length / this.itensPorPagina);
+    return Math.ceil(this.graficos.length / this.itensPorPagina);
   }
   
   mudarPagina(pagina: number): void {
@@ -79,10 +89,9 @@ export class FeedComponent {
   }
   
   graficoSelecionado(grafico: number){
-    for(let i = 0; i < this.sections.length; i++){
-      if(this.sections[i].id === grafico){
-        this.graficoService.passarDados(this.sections[i]);
-        this.encontrado = true;
+    for(let i = 0; i < this.graficos.length; i++){
+      if(this.graficos[i].id === grafico){
+        this.graficoService.passarDados(this.graficos[i]);
       }
     }
     this.router.navigate(['/grafico', grafico]);

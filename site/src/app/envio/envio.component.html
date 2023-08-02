@@ -1,85 +1,103 @@
 <div class="geral">
-
-    <div class="top">
-        <div class="left-top">
-            <div class="view-image">
-                <img [src]="imagemPreview" *ngIf="imagemPreview">
-            </div>
-            <div class="buttons">
-              <div class="imagem">
-                <label for="imagem" class="custom-file-upload">Imagem Visual</label>
-                <input (change)="onFileChange($event, 'imagem')" accept=".jpg, .jpeg, .png" type="file" id="imagem" class="input-file">
-                <span>{{nomeImagem}}</span>
-              </div>
-              <div class="arquivo">
-                <label for="arquivo" class="custom-file-upload">Arquivo Tátil</label>
-                <input (change)="onFileChange($event, 'arquivo')" accept=".grt" type="file" id="arquivo" class="input-file">
-                <span>{{nomeArquivo}}</span>
-              </div> 
-            </div>
+  <div class="top">
+    <div class="left-top">
+      <div class="view-image">
+        <img [src]="imagemPreview" *ngIf="imagemPreview">
+      </div>
+      <div class="buttons">
+        <div class="imagem">
+          <label for="imagem" class="custom-file-upload">Imagem Visual</label>
+          <input (change)="onFileChange($event, 'imagem')" accept=".jpg, .jpeg, .png" type="file" id="imagem"
+            class="input-file">
+          <span>{{nomeImagem}}</span>
         </div>
-        <div class="right-top">
-            <div class="item">
-              <label for="nome">Título</label>
-              <input [(ngModel)]="titulo" type="text" class="form-control custom-input" id="titulo" name="titulo" placeholder="ex: Mapa do Brasil">
-            </div>
-            <div class="item">
-              <label for="nome">Palavras-chave</label>
-              <input [(ngModel)]="palavras" type="text" class="form-control custom-input" id="keywords" name="keywords" placeholder="ex: mapa do brasil, geografia">
-            </div>
-            <div class="item">
-              <label for="nome">Descrição</label>
-              <textarea [(ngModel)]="descricao" class="form-control" id="mensagem" rows="3" name="descricao" placeholder="Insira uma descrição"></textarea>
-            </div>
-          </div>
+        <div class="arquivo">
+          <label for="arquivo" class="custom-file-upload">Arquivo Tátil</label>
+          <input (change)="onFileChange($event, 'arquivo')" accept=".grt" type="file" id="arquivo" class="input-file">
+          <span>{{nomeArquivo}}</span>
         </div>
-
-    <div class="bot">
-        <div class="table">
-          <table class="table table-striped table-hover">
-              <thead>
-                <tr>
-                  <th class="text-center">Nível</th>
-                  <th class="text-center">Disciplina</th>
-                  <th class="text-center">Remover</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let materia of materias">
-                  <td class="text-center">{{ materia.nivel }}</td>
-                  <td class="text-center">{{ materia.disciplina }}</td>
-                  <td class="text-center">
-                    <button (click)="removerMateria(materia)">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-                        <path d="M6.5 1a.5.5 0 0 1 .5.5V2h2V1.5a.5.5 0 0 1 1 0V2h2V1.5a.5.5 0 0 1 1 0V2h1a2 2 0 0 1 2 2v1a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V4a2 2 0 0 1 2-2h1V1.5a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0V3H4V2.5a.5.5 0 0 0-1 0V3H2V2a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v1H9V1.5zM2.879 4L2 4.879V14a1 1 0 0 0 1 1h9a1 1 0 0 0 1-1V4.879L13.121 4H2.879zM3 5v8a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5V5H3z"/>
-                      </svg>
-                    </button>
-                  </td>
-                </tr>
-              </tbody>
-          </table>
-        </div>
-        <div class="select"> 
-          <select class="form-control" [(ngModel)]="nivel">
-            <option>Fundamental I</option>
-            <option>Fundamental II</option>
-            <option>Médio</option>
-            <option>Superior</option>
-          </select>
-          <select class="form-control" [(ngModel)]="disciplina"> 
-            <option>Biologia</option>
-            <option>Física</option>
-            <option>Geografia</option>
-            <option>História</option>
-            <option>Informática</option>
-            <option>Inglês</option>
-            <option>Matemática</option>
-            <option>Português</option>
-            <option>Química</option>
-          </select>
-          <button class="btn btn-blue w-100" (click)="addMateria()">Adicipnar</button>
-        </div>
+      </div>
     </div>
-    <button class="btn btn-primary w-100" (click)="salvarArquivo()">Salvar</button>
-    <button style="margin-bottom: 100px;" class="btn btn-danger w-100" (click)="goToHome()">cancelar</button>
+    <div class="right-top">
+      <div class="item">
+        <label for="nome">Título</label>
+        <input [(ngModel)]="titulo" type="text" class="form-control custom-input" id="titulo" name="titulo"
+          placeholder="ex: Mapa do Brasil">
+      </div>
+      <div class="item">
+        <label for="nome">Palavras-chave</label>
+        <input [(ngModel)]="palavras" type="text" class="form-control custom-input" id="keywords" name="keywords"
+          placeholder="ex: mapa do brasil, geografia">
+      </div>
+      <div class="item">
+        <label for="nome">Descrição</label>
+        <textarea [(ngModel)]="descricao" class="form-control" id="mensagem" rows="3" name="descricao"
+          placeholder="Insira uma descrição"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="bot">
+    <div class="table">
+      <table class="table table-striped table-hover">
+        <thead>
+          <tr>
+            <th class="text-center">Nível</th>
+            <th class="text-center">Disciplina</th>
+            <th class="text-center">Remover</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let materia of materias">
+            <td class="text-center">{{ materia.nivel }}</td>
+            <td class="text-center">{{ materia.disciplina }}</td>
+            <td class="text-center">
+              <button (click)="removerMateria(materia)">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                  class="bi bi-trash" viewBox="0 0 16 16">
+                  <path
+                    d="M6.5 1a.5.5 0 0 1 .5.5V2h2V1.5a.5.5 0 0 1 1 0V2h2V1.5a.5.5 0 0 1 1 0V2h1a2 2 0 0 1 2 2v1a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V4a2 2 0 0 1 2-2h1V1.5a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0V3H4V2.5a.5.5 0 0 0-1 0V3H2V2a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v1H9V1.5zM2.879 4L2 4.879V14a1 1 0 0 0 1 1h9a1 1 0 0 0 1-1V4.879L13.121 4H2.879zM3 5v8a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5V5H3z" />
+                </svg>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="select">
+      <div class="nivel">
+        <label>Grau de escolaridade</label>
+        <select class="form-control" [(ngModel)]="nivel">
+          <option>Fundamental I</option>
+          <option>Fundamental II</option>
+          <option>Médio</option>
+          <option>Superior</option>
+        </select>
+      </div>
+      <div class="disciplina">
+        <div class="change">
+          <label>Disciplina</label>
+          <button *ngIf="!change" type="button" (click)="onChangeMais()"><img src="./assets/img/icon/mais.png"></button>
+          <button *ngIf="change" type="button" (click)="onChangeMenos()"><img src="./assets/img/icon/menos.png"></button>
+        </div>
+        <input class="form-control custom-input" *ngIf="change" type="text" [(ngModel)]="disciplina">
+        <select *ngIf="!change" class="form-control" [(ngModel)]="disciplina">
+          <option>Biologia</option>
+          <option>Física</option>
+          <option>Geografia</option>
+          <option>História</option>
+          <option>Informática</option>
+          <option>Inglês</option>
+          <option>Matemática</option>
+          <option>Português</option>
+          <option>Química</option>
+        </select>
+      </div>
+      <div class="adicionar">
+        <button class="btn btn-blue w-100" (click)="addMateria()">Adicionar</button>
+      </div>
+    </div>
+  </div>
+  <button class="btn btn-primary w-100" (click)="salvarArquivo()">Salvar</button>
+  <button style="margin-bottom: 100px;" class="btn btn-danger w-100" (click)="goToHome()">Cancelar</button>
 </div>

@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import br.com.api.dto.ArquivoDTO;
+import br.com.api.dto.ComentarioDTO;
 import br.com.api.modelo.ArquivoModelo;
 import br.com.api.modelo.ComentarioModelo;
 import br.com.api.modelo.MateriaModelo;
@@ -116,16 +117,35 @@ public class ArquivoService {
         return destaquesUsuario;
     }
 
-    public List<ArquivoModelo> pesquisarArquivos(List<String> palavrasChave, String disciplina, List<String> niveis) {
+    public List<ArquivoDTO> pesquisarArquivos(List<String> palavrasChave, String disciplina, List<String> niveis) {
+        List<ArquivoModelo> arquivos;
+        List<ArquivoDTO> arquivosDTO = new ArrayList<>();
         if (palavrasChave != null && !palavrasChave.isEmpty()) {
-            return arquivoRepositorio.findByPalavras_PalavraIn(palavrasChave);
+            arquivos = arquivoRepositorio.findByPalavras_PalavraIn(palavrasChave);
         } else if (disciplina != null && !disciplina.isEmpty()) {
-            return arquivoRepositorio.findByMaterias_Disciplina(disciplina);
+            arquivos = arquivoRepositorio.findByMaterias_Disciplina(disciplina);
         } else if (niveis != null && !niveis.isEmpty()) {
-            return arquivoRepositorio.findByMaterias_NivelIn(niveis);
+            arquivos = arquivoRepositorio.findByMaterias_NivelIn(niveis);
         } else {
-            return toList(arquivoRepositorio.findAll());
+            arquivos = toList(arquivoRepositorio.findAll());
         }
+
+        for(ArquivoModelo arquivo : arquivos){
+            ArquivoDTO dto = new ArquivoDTO();
+            dto.setId(arquivo.getId());
+            dto.setPathArquivo(arquivo.getPathArquivo());
+            dto.setPathImagem(arquivo.getPathImagem());            
+            dto.setDescricao(arquivo.getDescricao());
+            dto.setData(arquivo.getData());
+            dto.setHora(arquivo.getHora());
+            dto.setCurtidas(arquivo.getCurtidas());
+            dto.setTitulo(arquivo.getTitulo());
+            dto.setAutorNome(arquivo.getUsuario().getNome());
+            dto.setPathFotoAutor(arquivo.getUsuario().getFoto());
+            dto.setKeywords(arquivo.getPalavras());
+            arquivosDTO.add(dto);
+        }
+        return arquivosDTO;
     }
 
     private <T> List<T> toList(Iterable<T> iterable) {
@@ -151,9 +171,20 @@ public class ArquivoService {
         }
    }
 
-   public List<ComentarioModelo> listarComentariosPorIdArquivo(Long arquivoId){
-        return comentarioRepositorio.findByArquivoId(arquivoId);
-   }
+   public List<ComentarioDTO> listarComentariosPorIdArquivo(Long arquivoId){
+        List<ComentarioModelo> comentarios = comentarioRepositorio.findByArquivoId(arquivoId);
+        List<ComentarioDTO> comentariosDTO = new ArrayList<>();   
+
+        for(ComentarioModelo comentario : comentarios){
+            ComentarioDTO dto = new ComentarioDTO();
+            dto.setPathFoto(comentario.getUsuario().getFoto());
+            dto.setUsuario(comentario.getUsuario().getUsuario());
+            dto.setDescricao(comentario.getDescricao());
+            comentariosDTO.add(dto);
+        }
+
+        return comentariosDTO;
+  }
 
    public ResponseEntity<?> curtirGrafico(Long arquivoId){
         Optional<ArquivoModelo> arquivoOptional = arquivoRepositorio.findById(arquivoId);

@@ -7,62 +7,67 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <form class="form-inline">
-                <input class="form-control mr-sm-2 bg-custom" type="search" placeholder="Pesquisar" aria-label="Pesquisar">
-                <button class="btn btn-custom my-2 my-sm-0" type="submit"><img
-                    src="assets/img/icon/search-icon.svg"></button>
-              </form>
-            </li>
-            <li class="nav-item" *ngIf="logged">
-              <a class="nav-link" [routerLink]="['']"><img src="assets/img/icon/home.svg"><span>Início</span></a>
-            </li>
-            <li class="nav-item" *ngIf="logged">
-              <a class="nav-link" [routerLink]="['/perfil']"><img src="assets/img/icon/perfil.svg"><span>Perfil</span></a>
-            </li>
-            <li class="nav-item" *ngIf="logged">
-              <a class="nav-link" [routerLink]="['/favoritos']"><img src="assets/img/icon/perfil.svg"><span>Salvos</span></a>
-            </li>
-          </ul>
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item" *ngIf="!logged">
-              <a class="nav-link" [routerLink]="['/']"><img (click)="abrirModalInfo()" class="btn-home" src="assets/img/icon/up.svg"></a>
-            </li>
-            <li class="nav-item" *ngIf="!logged">
-              <a class="nav-link" (click)="abrirModalLogin()"><span>Entrar</span></a>
-            </li>
-            <li class="nav-item" *ngIf="!logged">
-              <a class="nav-link" (click)="abrirModalCadastro()"><span>Criar conta</span></a>
-            </li>
-            <li class="nav-item" *ngIf="logged">
-              <a class="nav-link" [routerLink]="['/envio']"><img src="assets/img/icon/plus.svg"><span>Novo envio</span></a>
-            </li>
-            <li class="nav-item" *ngIf="logged">
-              <label for="selecaoAtributos" class="select-image-label" (click)="alternarOpcoes()">
-                <img src="{{avatar}}" class="select-icon">
-                <div class="custom-select">
-                  <ul class="options-list" [ngClass]="{ 'show-options': mostrarOpcoes }">
-                    <li class="list">
-                      <a routerLink="/perfil">Editar perfil</a>
-                    </li>
-                    <li class="list">
-                      <a (click)="abrirModalAlterar()">Alterar senha</a>
-                    </li>
-                    <li class="list">
-                      <a (click)="sair()">Sair</a>
-                    </li>
-                  </ul>
-                </div>
-              </label>
-            </li>
-          </ul>
+          <div class="left-content">
+            <ul class="navbar-nav">
+              <li class="nav-custom">
+                <form class="form-inline">
+                  <input [(ngModel)]="key" name="key" class="form-control mr-sm-2 bg-custom" type="search" placeholder="Pesquisar" aria-label="Pesquisar">
+                  <button class="btn btn-custom my-2 my-sm-0" type="submit" (click)="pesquisar()"><img
+                      src="assets/img/icon/search-icon.svg">
+                  </button>
+                </form>
+              </li>
+              <li class="nav-item" *ngIf="logged">
+                <a class="nav-link" [routerLink]="['']"><img src="assets/img/icon/home.svg"><span>Início</span></a>
+              </li>
+              <li class="nav-item" *ngIf="logged">
+                <a class="nav-link" [routerLink]="['/perfil']"><img src="assets/img/icon/perfil.svg"><span>Perfil</span></a>
+              </li>
+              <li class="nav-item" *ngIf="logged">
+                <a class="nav-link" [routerLink]="['/favoritos']"><img src="assets/img/icon/marca-paginas.png"><span>Salvos</span></a>
+              </li>
+            </ul>
+          </div>
+          <div class="right-content">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item" *ngIf="!logged">
+                <a class="nav-link" [routerLink]="['/']"><img (click)="abrirModalInfo()" class="btn-home" src="./assets/img/icon/info.png"></a>
+              </li>
+              <li class="nav-item" *ngIf="!logged">
+                <a class="nav-link" (click)="abrirModalLogin()"><span>Entrar</span></a>
+              </li>
+              <li class="nav-item" *ngIf="!logged">
+                <a class="nav-link" (click)="abrirModalCadastro()"><span>Criar conta</span></a>
+              </li>
+              <li class="nav-custom2" *ngIf="logged">
+                <a class="nav-link" [routerLink]="['/envio']"><img src="assets/img/icon/plus.svg"><span>Novo envio</span></a>
+              </li>
+              <li class="nav-item" *ngIf="logged">
+                <label for="selecaoAtributos" class="select-image-label" (click)="alternarOpcoes()">
+                  <img src="{{avatar}}" class="select-icon">
+                  <div class="custom-select">
+                    <ul class="options-list" [ngClass]="{ 'show-options': mostrarOpcoes }">
+                      <li class="list">
+                        <a routerLink="/perfil">Editar perfil</a>
+                      </li>
+                      <li class="list">
+                        <a (click)="abrirModalAlterar()">Alterar senha</a>
+                      </li>
+                      <li class="list">
+                        <a (click)="sair()">Sair</a>
+                      </li>
+                    </ul>
+                  </div>
+                </label>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </nav>
   </header>
   
-
+<app-modal-info></app-modal-info>
 <app-modal-cadastro></app-modal-cadastro>
 <app-modal-login></app-modal-login>
 <app-modal-response></app-modal-response>

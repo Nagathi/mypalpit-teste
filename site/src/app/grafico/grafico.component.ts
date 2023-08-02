@@ -10,9 +10,14 @@ import { UsuarioService } from '../services/usuario.service';
   styleUrls: ['./grafico.component.css']
 })
 export class GraficoComponent {
-  grafico!: any;
   private readonly apiURL = environment.apiURL;
   private readonly pathSalvarArquivo = environment.pathSalvarArquivo;
+  private readonly pathComentar = environment.pathComentar;
+  private readonly pathListarComentarios = environment.pathListarComentarios;
+  grafico!: any;
+  comment = false;
+  descricao: string = '';
+  comentarios: any[] = [];
 
   constructor(private graficoService: GraficoService,
               private http: HttpClient,
@@ -24,12 +29,37 @@ export class GraficoComponent {
         this.grafico = graficoAtualizado;
       }
     );
+    this.http.get<any[]>(`${this.apiURL}/${this.pathListarComentarios}?arquivo=${this.grafico.id}`).subscribe((data) => {
+        this.comentarios = data.map((file: any) => {
+          return {
+            foto: this.apiURL+"/"+file.pathFoto,
+            user: file.usuario,
+            descricao: file.descricao
+          }
+        })
+    });
   }
 
   salvar(){
     this.http.post(`${this.apiURL}/${this.pathSalvarArquivo}?arquivo_id=${this.grafico.id}&usuario_id=${this.userService.usuario.codigo}`, null).subscribe(response => {
       alert(response)
     });
+  }
+
+  comentar(){
+    this.comment = true;
+  }
+
+  enviarComentario(){
+    this.comment = false;
+    const formData = {
+      arquivo: this.grafico.id,
+      usuario: this.userService.usuario.codigo,
+      descricao: this.descricao
+    };
+    this.http.post(`${this.apiURL}/${this.pathComentar}?arquivo=${formData.arquivo}&usuario=${formData.usuario}&descricao=${formData.descricao}`, null).subscribe(ressponse => {
+      console.log(Response)
+    })
   }
 }
 

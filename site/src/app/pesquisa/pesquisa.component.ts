@@ -23,25 +23,27 @@ export class PesquisaComponent {
   ngOnInit() {
     this.graficoService.pesquisa$.subscribe(
       (graficos: any) => {
-        this.sections = graficos.map((file: any) => {
-          const formattedKeywords = Array.isArray(file.keywords)
-            ? file.keywords.map((keyword: any) => `#${keyword.palavra}`)
-            : [];
-
-          return {
-            id: file.id,
-            arquivo: file.pathArquivo,
-            imagem: this.apiURL+"/"+file.pathImagem,
-            titulo: file.titulo,
-            keywords: formattedKeywords,
-            descricao: file.descricao,
-            data: file.data,
-            hora: file.hora,
-            curtidas: file.curtidas,
-            usuario: file.usuario.nome,
-            avatar: this.apiURL+"/"+file.usuario.foto
-          };
-        });
+        if (graficos) {
+          this.sections = graficos.map((file: any) => {
+            const formattedKeywords = Array.isArray(file.keywords)
+              ? file.keywords.map((keyword: any) => `#${keyword.palavra}`)
+              : [];
+  
+            return {
+              id: file.id,
+              arquivo: file.pathArquivo,
+              imagem: this.apiURL+"/"+file.pathImagem,
+              titulo: file.titulo,
+              keywords: formattedKeywords,
+              descricao: file.descricao,
+              data: file.data,
+              hora: file.hora,
+              curtidas: file.curtidas,
+              usuario: file.autorNome,
+              avatar: this.apiURL+"/"+file.pathFotoAutor
+            };
+          });
+        }
       }
     );
   }

@@ -6,6 +6,9 @@ import { ModalInfoService } from '../../services/modal-info.service';
 import { ModalAlterarService } from '../../services/modal-alterar.service';
 import { UsuarioService } from '../../services/usuario.service';
 import { environment } from 'environment';
+import { HttpClient } from '@angular/common/http';
+import { GraficoService } from 'src/app/services/grafico.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -14,11 +17,14 @@ import { environment } from 'environment';
 })
 export class HeaderComponent {
   private readonly apiURL = environment.apiURL;
+  private readonly pathPesquisar = environment.pathPesquisar;
 
   opcaoSelecionada: string = '';
   mostrarOpcoes: boolean = false;
   logged: boolean;
-  avatar: string = ''
+  avatar: string = '';
+
+  key: string = '';
   
   constructor(private modalServiceCadastro: ModalCadastroService,
               private modalServiceLogin: ModalLoginService,
@@ -26,17 +32,28 @@ export class HeaderComponent {
               private modalServiceInfo: ModalInfoService,
               private modalServiceAlterar: ModalAlterarService,
               private userService: UsuarioService,
+              private graficoService: GraficoService,
+              private http: HttpClient,
+              private router: Router,
               private renderer: Renderer2
              ) {
     this.logged = false;
   }
 
   ngOnInit(){
-    this.userService.usuario$.subscribe(usuario =>{
-      this.avatar = this.apiURL+'/'+this.userService.usuario.foto;
-    });
+    
     this.modalServiceLogin.login$.subscribe(login => {
       this.logged = login;
+      this.userService.usuario$.subscribe(usuario =>{
+        this.avatar = this.apiURL+'/'+this.userService.usuario.foto;
+      });
+    });
+  }
+
+  pesquisar(){
+    this.http.get<any[]>(`${this.apiURL}/${this.pathPesquisar}?palavra=${this.key}`).subscribe(data => {
+      this.graficoService.responsePesquisa(data);
+      this.router.navigate(['/busca']);
     });
   }
 

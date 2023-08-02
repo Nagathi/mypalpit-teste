@@ -12,7 +12,7 @@
   <div class="editar" *ngIf="editar">
 
     <img [src]="foto">
-    <app-upload-dialog></app-upload-dialog>
+    <app-upload-dialog class="upload"></app-upload-dialog>
 
     <form class="form">
       <label style="font-weight: bold;">Nome</label>
@@ -53,24 +53,32 @@
     <div class="h1-content">
       <h1 style="font-size: 26px; margin-left: 20px; margin-top: 20px;">Destaques do perfil</h1>
     </div>
-    <div class="botao-sobreposto">
+    <div *ngIf="graficos.length == 0" class="botao-sobreposto">
       <button (click)="goToNovoEnvio()"><img src="assets/img/visual/default.svg"></button>
     </div>
-      <div class="destaque-content">
-        <div class="salvos">
-
-          <div class="imagens">
-              <section id="conteudos" *ngFor="let salvo of destaques">
-                  <a (click)="goToFile(salvo.id)">
-                      <section class="conteudo">
-                          <img class="img-content" src="{{salvo.imagem}}">
-                          <p class="p-nome">{{salvo.titulo}}</p>
-                          <div class="p-usuario"><img src="{{salvo.avatar}}"><p>{{salvo.usuario}}</p></div>
-                      </section>
-                  </a>
+    <div class="destaque-content">
+      <div class="salvos">
+        <div class="imagens">
+          <section id="conteudos" *ngFor="let grafico of getSectionsPorPagina()">
+            <a (click)="goToFile(grafico.id)">
+              <section class="conteudo">
+                <img class="img-content" src="{{grafico.imagem}}">
+                <p class="p-nome">{{grafico.titulo}}</p>
+                <div class="p-usuario"><img src="{{grafico.avatar}}"><p>{{grafico.usuario}}</p></div>
               </section>
-          </div>
+            </a>
+          </section>
+        </div>
       </div>
+    </div>
+    <div class="pagination">
+      <button class="page-button" [disabled]="paginaAtual === 1" (click)="mudarPagina(paginaAtual - 1)">
+        Anterior
+      </button>
+      <span>{{ paginaAtual }} de {{ totalPaginas() }}</span>
+      <button class="page-button" [disabled]="paginaAtual === totalPaginas()" (click)="mudarPagina(paginaAtual + 1)">
+        Próxima
+      </button>
     </div>
   </div>
 </div>

@@ -17,11 +17,24 @@ export class FavoriteComponent {
   qtdFavoritos: any = 0;
   opcaoSelecionada: string = 'Novos';
   id: string = this.userService.usuario.codigo;
-  salvos!: any[];
+  graficos: any[] = [];
+  itensPorPagina = 6;
+  paginaAtual = 1;
+
+  reordenarArray() {
+    if (this.opcaoSelecionada === 'Novos') {
+      this.graficos.sort((a, b) => b.id - a.id);
+    } else if (this.opcaoSelecionada === 'Antigos') {
+      this.graficos.sort((a, b) => a.id - b.id);
+    } else if (this.opcaoSelecionada === 'Populares') {
+      this.graficos.sort((a, b) => b.curtidas - a.curtidas);
+    }
+  }  
 
   selecionarOpcao(opcao: string) {
     this.opcaoSelecionada = opcao;
-  }
+    this.reordenarArray();
+  }  
 
   constructor(private http: HttpClient,
               private userService: UsuarioService,
@@ -32,7 +45,7 @@ export class FavoriteComponent {
 
   ngOnInit(){
     this.http.get<any[]>(`${this.apiURL}/${this.pathSalvos}/${this.id}`).subscribe(data => {
-      this.salvos = data.map(file => {
+      this.graficos = data.map(file => {
         const formattedKeywords = Array.isArray(file.keywords)
           ? file.keywords.map((keyword: any) => `#${keyword.palavra}`)
           : [];
@@ -51,14 +64,31 @@ export class FavoriteComponent {
           avatar: this.apiURL+"/"+file.pathFotoAutor
         };
       });
-      this.qtdFavoritos = this.salvos.length;
+      this.graficos.sort((a, b) => b.id - a.id);
+      this.qtdFavoritos = this.graficos.length;
     });
   } 
 
+  getSectionsPorPagina(): any[] {
+    const inicio = (this.paginaAtual - 1) * this.itensPorPagina;
+    const fim = inicio + this.itensPorPagina;
+    return this.graficos.slice(inicio, fim);
+  }
+
+  totalPaginas(): number {
+    return Math.ceil(this.graficos.length / this.itensPorPagina);
+  }
+  
+  mudarPagina(pagina: number): void {
+    if (pagina >= 1 && pagina <= this.totalPaginas()) {
+      this.paginaAtual = pagina;
+    }
+  }
+
   goToFile(id: number){
-    for(let i = 0; i < this.salvos.length; i++){
-      if(this.salvos[i].id === id){
-        this.graficoService.passarDados(this.salvos[i]);
+    for(let i = 0; i < this.graficos.length; i++){
+      if(this.graficos[i].id === id){
+        this.graficoService.passarDados(this.graficos[i]);
       }
     }
     this.router.navigate(['/grafico', id]);

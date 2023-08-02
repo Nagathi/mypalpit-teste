@@ -1,7 +1,7 @@
 .geral{
     position: relative;
     display: flex;
-    margin-top: 80px;
+    margin-top: 100px;
     margin-left: 20px;
     margin-right: 20px;
     flex-direction: row;
@@ -118,6 +118,11 @@ label{
     background-color: #2e7ab5;
 }
 
+.upload{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
 .input-img{
     margin: 10px;
     width: 90%;
@@ -145,7 +150,6 @@ label{
     height: 100%;
     display: flex;
     flex-direction: column;
-    margin-top: 100px;
 }
 
 .imagens {
@@ -203,6 +207,35 @@ label{
 .conteudo:hover {
     transform: scale(0.9);    
 }
+
+.page-button {
+    padding: 5px 10px;
+    margin: 0 5px;
+    background-color: #2E7BB4;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+  }
+
+    .page-button:hover {
+    background-color: #5c9ecf
+  }
+  
+  .page-button[disabled] {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  
+  .pagination span {
+    margin: 0 10px;
+  }
 
 @media screen and (max-width: 768px) {
     .geral {

@@ -1,77 +1,116 @@
-.content{
+.content {
+    position: relative;
     display: flex;
-    width: 97%;
-    margin-top: 10px;
-    margin-left: 1.5%;
-}
-
-.filtro{
-    width: 10%;
-    margin-right: 10px;
-}
-
-.salvos{
-    width: 100%;
-    height: 100%;
+    width: 95%;
+    margin-top: 100px;
+  }
+  
+  .filtro {
+    flex: 1;
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+  
+  .salvos {
+    flex: 5;
     display: flex;
     flex-direction: column;
-    background-color: white;
-    margin-top: 100px;
     margin-bottom: 100px;
-}
-
-.imagens {
+    background-color: white;
+  }
+  
+  .imagens {
     display: flex;
     width: 100%;
     flex-wrap: wrap;
     justify-content: flex-start;
-}
-
-.titulo{
+  }
+  
+  .titulo {
     display: flex;
     width: 100%;
     height: 80px;
-}
-
-.salvos *{
+  }
+  
+  .salvos * {
     margin: 5px;
-}
-
-#conteudos {
-    display: flex;
-}
-
-#conteudos a{
-   text-decoration: none;
-}
-
-.img-content{
+  }
+  
+  .img-content {
     width: 250px;
     height: 200px;
-}
-.p-nome{
+  }
+  
+  .p-nome {
     font-weight: bold;
-}
-
-.p-usuario{
+  }
+  
+  .p-usuario {
     display: flex;
     width: 100%;
     height: 50px;
-}
-.p-usuario img {
+  }
+  
+  .p-usuario img {
     border-radius: 50%;
-}
-.conteudo { 
-    margin-bottom: 20px; 
-    cursor: pointer; 
+  }
+  
+  .conteudo {
+    margin-bottom: 20px;
+    cursor: pointer;
     text-align: center;
-    
-}
-.conteudo p {
+  }
+  
+  .conteudo p {
     color: black;
     padding: 5px 10px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-}
-.conteudo:hover {
-    transform: scale(0.9);    
-}
+  }
+  
+  .conteudo:hover {
+    transform: scale(0.9);
+  }
+
+  .page-button {
+    padding: 5px 10px;
+    margin: 0 5px;
+    background-color: #2E7BB4;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+  }
+
+    .page-button:hover {
+    background-color: #5c9ecf
+  }
+  
+  .page-button[disabled] {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  
+  .pagination span {
+    margin: 0 10px;
+  }
+  
+  @media screen and (max-width: 768px) {
+    .content {
+        margin: 0;
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+    }
+  
+    .filtro {
+        margin-top: 100px;
+        width: 100%;
+        margin-bottom: 10px;
+    }
+  }  

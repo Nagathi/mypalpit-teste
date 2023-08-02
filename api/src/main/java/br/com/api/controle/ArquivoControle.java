@@ -18,8 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import br.com.api.dto.ArquivoDTO;
+import br.com.api.dto.ComentarioDTO;
 import br.com.api.modelo.ArquivoModelo;
-import br.com.api.modelo.ComentarioModelo;
 import br.com.api.modelo.MateriaModelo;
 import br.com.api.modelo.PalavrasModelo;
 import br.com.api.service.ArquivoService;
@@ -41,10 +41,13 @@ public class ArquivoControle {
             dto.setPathArquivo(arquivo.getPathArquivo());
             dto.setPathImagem(arquivo.getPathImagem());
             dto.setTitulo(arquivo.getTitulo());
+            dto.setData(arquivo.getData());
+            dto.setHora(arquivo.getHora());
             dto.setDescricao(arquivo.getDescricao());
             dto.setAutorNome(arquivo.getUsuario().getNome());
             dto.setPathFotoAutor(arquivo.getUsuario().getFoto());
-            dto.setKeywords(arquivo.getPalavras());
+            dto.setCurtidas(arquivo.getCurtidas());
+            dto.setHora(arquivo.getHora());
             arquivosDTO.add(dto);
         }
 
@@ -80,13 +83,13 @@ public class ArquivoControle {
     }
 
     @GetMapping("/consulta")
-    public ResponseEntity<List<ArquivoModelo>> pesquisarArquivos(
+    public ResponseEntity<List<ArquivoDTO>> pesquisarArquivos(
             @RequestParam(value = "palavrasChave", required = false) List<String> palavrasChave,
             @RequestParam(value = "disciplina", required = false) String disciplina,
             @RequestParam(value = "nivel", required = false) List<String> nivel
     ) {
 
-        List<ArquivoModelo> arquivos = arquivoService.pesquisarArquivos(palavrasChave, disciplina, nivel);
+        List<ArquivoDTO> arquivos = arquivoService.pesquisarArquivos(palavrasChave, disciplina, nivel);
 
         if (arquivos.isEmpty()) {
             return ResponseEntity.noContent().build();
@@ -113,7 +116,7 @@ public class ArquivoControle {
     }
 
     @GetMapping("/listar_comentarios")
-    public List<ComentarioModelo> listarComentarios(@RequestParam("arquivo") Long arquivoId){
+    public List<ComentarioDTO> listarComentarios(@RequestParam("arquivo") Long arquivoId){
         return arquivoService.listarComentariosPorIdArquivo(arquivoId);
     }
 
