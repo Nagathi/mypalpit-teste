@@ -104,7 +104,7 @@ export class EnvioComponent {
     formData.append('hora', hora);
     formData.append('materias', JSON.stringify(this.materias));
     formData.append('keywords', JSON.stringify(keywordsArray));
-
+    formData.append('impressora', 'Braille');
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'multipart/form-data');
 

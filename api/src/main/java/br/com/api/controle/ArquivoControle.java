@@ -47,8 +47,12 @@ public class ArquivoControle {
             dto.setAutorNome(arquivo.getUsuario().getNome());
             dto.setPathFotoAutor(arquivo.getUsuario().getFoto());
             dto.setCurtidas(arquivo.getCurtidas());
+            dto.setImpressora(arquivo.getImpressora());
+            dto.setDownloads(arquivo.getDownloads());
+            dto.setViews(arquivo.getViews());
             dto.setHora(arquivo.getHora());
             dto.setKeywords(arquivo.getPalavras());
+            dto.setMaterias(arquivo.getMaterias());
             arquivosDTO.add(dto);
         }
 
@@ -61,6 +65,7 @@ public class ArquivoControle {
                                                 @RequestPart("image") MultipartFile image,
                                                 @RequestParam("titulo") String titulo,
                                                 @RequestParam("descricao") String descricao,
+                                                @RequestParam("impressora") String impressora,
                                                 @RequestParam("data") String data,
                                                 @RequestParam("hora") String hora,
                                                 @RequestParam("autor") Long autorId,
@@ -70,7 +75,7 @@ public class ArquivoControle {
             ObjectMapper objectMapper = new ObjectMapper();
             List<MateriaModelo> materias = objectMapper.readValue(materiasJson, new TypeReference<List<MateriaModelo>>(){});
             List<PalavrasModelo> palavras = objectMapper.readValue(palavrasJson, new TypeReference<List<PalavrasModelo>>(){});
-            return arquivoService.salvarArquivo(file, image,  titulo, descricao, data, hora, autorId, materias, palavras);  
+            return arquivoService.salvarArquivo(file, image,  titulo, descricao, impressora, data, hora, autorId, materias, palavras);  
         }catch(Exception e){
             System.out.println(e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao processar a requisição.");
@@ -119,5 +124,15 @@ public class ArquivoControle {
     @GetMapping("/listar_comentarios")
     public List<ComentarioDTO> listarComentarios(@RequestParam("arquivo") Long arquivoId){
         return arquivoService.listarComentariosPorIdArquivo(arquivoId);
+    }
+
+    @PostMapping("/baixar")
+    public ResponseEntity<?> downloadGrafico(@RequestParam("id") Long arquivoId){
+        return arquivoService.downloadGrafico(arquivoId);
+    }
+
+    @PostMapping("/view")
+    public ResponseEntity<?> viewGrafico(@RequestParam("id") Long arquivoId){
+        return arquivoService.visualizarGrafico(arquivoId);
     }
 }

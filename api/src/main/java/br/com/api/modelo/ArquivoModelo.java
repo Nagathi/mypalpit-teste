@@ -29,7 +29,10 @@ public class ArquivoModelo {
     private String descricao;
     private String data;
     private String hora;
+    private String impressora;
     private int curtidas;
+    private int downloads;
+    private int views;
     
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "arquivo_id")

@@ -3,6 +3,7 @@ import { GraficoService } from '../services/grafico.service';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'environment';
 import { UsuarioService } from '../services/usuario.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-grafico',
@@ -14,6 +15,9 @@ export class GraficoComponent {
   private readonly pathSalvarArquivo = environment.pathSalvarArquivo;
   private readonly pathComentar = environment.pathComentar;
   private readonly pathListarComentarios = environment.pathListarComentarios;
+  private readonly pathDownload = environment.pathDownload;
+  private readonly pathCurtir = environment.pathCurtir;
+  
   grafico!: any;
   comment = false;
   descricao: string = '';
@@ -21,13 +25,13 @@ export class GraficoComponent {
 
   constructor(private graficoService: GraficoService,
               private http: HttpClient,
-              private userService: UsuarioService) { }
+              private userService: UsuarioService,
+              private router: Router) { }
 
   ngOnInit() {
     this.graficoService.grafico$.subscribe(
       (graficoAtualizado: any) => {
         this.grafico = graficoAtualizado;
-        console.log(this.grafico)
       }
     );
     this.http.get<any[]>(`${this.apiURL}/${this.pathListarComentarios}?arquivo=${this.grafico.id}`).subscribe((data) => {
@@ -59,8 +63,25 @@ export class GraficoComponent {
       descricao: this.descricao
     };
     this.http.post(`${this.apiURL}/${this.pathComentar}?arquivo=${formData.arquivo}&usuario=${formData.usuario}&descricao=${formData.descricao}`, null).subscribe(ressponse => {
-      console.log(Response)
+      this.ngOnInit()
     })
+  }
+
+  downloadGrt(){
+    this.http.post(`${this.apiURL}/${this.pathDownload}?id=${this.grafico.id}`, null).subscribe(response => {
+      this.ngOnInit()
+    });
+  }
+  downloadZip(){
+    this.http.post(`${this.apiURL}/${this.pathDownload}?id=${this.grafico.id}`, null).subscribe(response => {
+      this.ngOnInit()
+    });
+  }
+
+  curtir(){
+    this.http.post(`${this.apiURL}/${this.pathCurtir}?arquivo=${this.grafico.id}&usuario=${this.userService.usuario.codigo}`, null).subscribe(response => {
+      this.ngOnInit()
+    });
   }
 }
 

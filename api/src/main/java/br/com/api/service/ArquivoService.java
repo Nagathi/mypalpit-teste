@@ -49,6 +49,7 @@ public class ArquivoService {
                                             MultipartFile image,
                                             String titulo,
                                             String descricao,
+                                            String impressora,
                                             String data,
                                             String hora,
                                             Long autorId,
@@ -76,8 +77,11 @@ public class ArquivoService {
             novoArquivo.setDescricao(descricao);
             novoArquivo.setData(data);
             novoArquivo.setHora(hora);
+            novoArquivo.setImpressora(impressora);
             novoArquivo.setCurtidas(0);
-            Optional<UsuarioModelo> autorOptional  = usuarioRepositorio.findById(autorId);
+            novoArquivo.setDownloads(0);
+            novoArquivo.setViews(0);
+            Optional<UsuarioModelo> autorOptional = usuarioRepositorio.findById(autorId);
             UsuarioModelo usuario = autorOptional.get();
             novoArquivo.setUsuario(usuario);
             novoArquivo.setMaterias(materias);
@@ -106,11 +110,15 @@ public class ArquivoService {
             dto.setDescricao(destaque.getDescricao());
             dto.setData(destaque.getData());
             dto.setHora(destaque.getHora());
+            dto.setImpressora(destaque.getImpressora());
             dto.setCurtidas(destaque.getCurtidas());
+            dto.setDownloads(destaque.getDownloads());
+            dto.setViews(destaque.getViews());
             dto.setTitulo(destaque.getTitulo());
             dto.setAutorNome(destaque.getUsuario().getNome());
             dto.setPathFotoAutor(destaque.getUsuario().getFoto());
             dto.setKeywords(destaque.getPalavras());
+            dto.setMaterias(destaque.getMaterias());
             destaquesUsuario.add(dto);
         }
 
@@ -138,11 +146,15 @@ public class ArquivoService {
             dto.setDescricao(arquivo.getDescricao());
             dto.setData(arquivo.getData());
             dto.setHora(arquivo.getHora());
+            dto.setImpressora(arquivo.getImpressora());
             dto.setCurtidas(arquivo.getCurtidas());
+            dto.setDownloads(arquivo.getDownloads());
+            dto.setViews(arquivo.getViews());
             dto.setTitulo(arquivo.getTitulo());
             dto.setAutorNome(arquivo.getUsuario().getNome());
             dto.setPathFotoAutor(arquivo.getUsuario().getFoto());
             dto.setKeywords(arquivo.getPalavras());
+            dto.setMaterias(arquivo.getMaterias());
             arquivosDTO.add(dto);
         }
         return arquivosDTO;
@@ -198,14 +210,42 @@ public class ArquivoService {
             dto.setDescricao(arquivo.getDescricao());
             dto.setData(arquivo.getData());
             dto.setHora(arquivo.getHora());
+            dto.setImpressora(arquivo.getImpressora());
             dto.setCurtidas(arquivo.getCurtidas());
+            dto.setDownloads(arquivo.getDownloads());
+            dto.setViews(arquivo.getViews());
             dto.setTitulo(arquivo.getTitulo());
             dto.setAutorNome(arquivo.getUsuario().getNome());
             dto.setPathFotoAutor(arquivo.getUsuario().getFoto());
             dto.setKeywords(arquivo.getPalavras());
+            dto.setMaterias(arquivo.getMaterias());
             arquivosDTO.add(dto);
         }
         return arquivosDTO;
+    }
+
+    public ResponseEntity<?> downloadGrafico(Long graficoId){
+        Optional<ArquivoModelo> arquivoOptional = arquivoRepositorio.findById(graficoId);
+        if(!arquivoOptional.isEmpty()){
+            ArquivoModelo arquivo = arquivoOptional.get();
+            arquivo.setDownloads(arquivo.getDownloads()+1);
+            arquivoRepositorio.save(arquivo);
+            return ResponseEntity.ok().build();
+        }else{
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    public ResponseEntity<?> visualizarGrafico(Long graficoId){
+        Optional<ArquivoModelo> arquivoOptional = arquivoRepositorio.findById(graficoId);
+        if(!arquivoOptional.isEmpty()){
+            ArquivoModelo arquivo = arquivoOptional.get();
+            arquivo.setViews(arquivo.getViews()+1);
+            arquivoRepositorio.save(arquivo);
+            return ResponseEntity.ok().build();
+        }else{
+            return ResponseEntity.notFound().build();
+        }
     }
 }
 

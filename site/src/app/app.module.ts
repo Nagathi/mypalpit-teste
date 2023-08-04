@@ -22,6 +22,7 @@ import { ModalAlterarComponent } from './modais/modal-alterar/modal-alterar.comp
 import { EnvioComponent } from './envio/envio.component';
 import { GraficoComponent } from './grafico/grafico.component';
 import { PesquisaComponent } from './pesquisa/pesquisa.component'
+import { F5Service } from './services/f5.service';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,7 @@ import { PesquisaComponent } from './pesquisa/pesquisa.component'
     BrowserAnimationsModule,
   ],
   providers: [
-    
+    F5Service
   ],
   bootstrap: [AppComponent]
 })

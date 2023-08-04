@@ -13,6 +13,7 @@ import { GraficoService } from 'src/app/services/grafico.service';
 export class FeedComponent {
   private readonly apiURL = environment.apiURL;
   private readonly pathListarAquivos = environment.pathListarAquivos;
+  private readonly pathVisualizar = environment.pathVisualizar;
 
   opcaoSelecionada: string = 'Novos';
   itensPorPagina = 6;
@@ -29,27 +30,35 @@ export class FeedComponent {
   ngOnInit() {
     this.http.get<any[]>(`${this.apiURL}/${this.pathListarAquivos}`).subscribe(
       (arquivos) => {
-        console.log(arquivos)
         this.graficos = arquivos.map(file => {
-          const formattedKeywords = Array.isArray(file.keywords)
-            ? file.keywords.map((keyword: any) => `#${keyword.palavra}`)
-            : [];
-
+            const formattedKeywords = Array.isArray(file.keywords)
+              ? file.keywords.map((keyword: any) => `#${keyword.palavra}`)
+              : [];
+            const formattedDisciplinas = Array.isArray(file.materias)
+              ? file.materias.map((materia: any) => `${materia.disciplina}, `)
+              : [];
+            const formattedNiveis = Array.isArray(file.materias)
+              ? file.materias.map((materia: any) => `${materia.nivel}, `)
+              : [];
           return {
-            id: file.id,
             arquivo: file.pathArquivo,
-            imagem: this.apiURL+"/"+file.pathImagem,
-            titulo: file.titulo,
-            keywords: formattedKeywords,
-            descricao: file.descricao,
-            data: file.data,
-            hora: file.hora,
+            avatar: this.apiURL+"/"+file.pathFotoAutor,
             curtidas: file.curtidas,
+            data: file.data,
+            descricao: file.descricao,
+            disciplina: formattedDisciplinas,
+            downloads: file.downloads,
+            hora: file.hora,
+            id: file.id,
+            imagem: this.apiURL+"/"+file.pathImagem,
+            impressora: file.impressora,
+            keywords: formattedKeywords,
+            nivel: formattedNiveis,
+            titulo: file.titulo,
             usuario: file.autorNome,
-            avatar: this.apiURL+"/"+file.pathFotoAutor
+            views: file.views,
           };
         });
-
         this.graficos.sort((a, b) => b.id - a.id);
       },
       (error) => {
@@ -89,13 +98,16 @@ export class FeedComponent {
     }
   }
   
-  graficoSelecionado(grafico: number){
+  graficoSelecionado(id: number){
     for(let i = 0; i < this.graficos.length; i++){
-      if(this.graficos[i].id === grafico){
+      if(this.graficos[i].id === id){
         this.graficoService.passarDados(this.graficos[i]);
+        this.http.post(`${this.apiURL}/${this.pathVisualizar}?id=${id}`, null).subscribe(response => {
+          
+        });
       }
     }
-    this.router.navigate(['/grafico', grafico]);
+    this.router.navigate(['/grafico', id]);
   }
   
 }

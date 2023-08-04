@@ -137,11 +137,15 @@ public class UsuarioService {
                 dto.setDescricao(salvo.getArquivo().getDescricao());
                 dto.setData(salvo.getArquivo().getData());
                 dto.setHora(salvo.getArquivo().getHora());
+                dto.setImpressora(salvo.getArquivo().getImpressora());
                 dto.setCurtidas(salvo.getArquivo().getCurtidas());
+                dto.setDownloads(salvo.getArquivo().getDownloads());
+                dto.setViews(salvo.getArquivo().getViews());
                 dto.setTitulo(salvo.getArquivo().getTitulo());
                 dto.setAutorNome(salvo.getArquivo().getUsuario().getNome());
                 dto.setPathFotoAutor(salvo.getArquivo().getUsuario().getFoto());
                 dto.setKeywords(salvo.getArquivo().getPalavras());
+                dto.setMaterias(salvo.getArquivo().getMaterias());
                 arquivosSalvos.add(dto);
             }
 

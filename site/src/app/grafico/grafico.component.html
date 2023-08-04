@@ -1,46 +1,56 @@
 <div class="geral">
-
-
-<div class="arquivo">
-    <div class="autor">
-        <img src="{{grafico.avatar}}">
-        <div class="nome">
-            <p>{{grafico.usuario}}</p>
-            <span>{{grafico.data}} às {{grafico.hora}}</span>
+    <div class="arquivo">
+        <div class="autor">
+            <img src="{{grafico.avatar}}">
+            <div class="nome">
+                <p>{{grafico.usuario}}</p>
+                <span>{{grafico.data}} às {{grafico.hora}}</span>
+            </div>
         </div>
-    </div>
-    <div class="titulo">
-        <h2>{{grafico.titulo}}</h2>
-        <div class="keywords">
-            <span *ngFor="let keyword of grafico.keywords">{{keyword}}</span>
-        </div>
-        
-        <span class="descricao">{{grafico.descricao}}</span>
-    </div>
-    <div class="imagem">
-        <img src="{{grafico.imagem}}">
-    </div>
-    <div class="buttons">
-        <button><img src="./assets/img/icon/gostar.png">Gostei</button>
-        <button (click)="comentar()"><img src="./assets/img/icon/comentar.png">Comentar</button>
-        <button (click)="salvar()"><img src="./assets/img/icon/salvar.png">Salvar</button>
-    </div>
-    <div class="comentar" *ngIf="comment">
-        <input type="text" class="form-control" name="descricao" placeholder="Escrever um comentário" [(ngModel)]="descricao">
-        <button (click)="enviarComentario()" class="btn btn-custom">Comentar</button>
-    </div>
-    <div class="comentarios">
-        <section *ngFor="let comentario of comentarios">
-            <div>
-                <img src="{{comentario.foto}}">
-                <h3>{{comentario.user}}</h3>
+        <div class="titulo">
+            <h2>{{grafico.titulo}}</h2>
+            <div class="keywords">
+                <span *ngFor="let keyword of grafico.keywords">{{keyword}}</span>
             </div>
             
-            <div>
-                <h4>{{comentario.descricao}}</h4>
-            </div>
-            
-        </section>
+            <span class="descricao">{{grafico.descricao}}</span>
+        </div>
+        <div class="imagem">
+            <img src="{{grafico.imagem}}">
+        </div>
+        <div class="buttons">
+            <button (click)="curtir()"><img src="./assets/img/icon/gostar.png">Gostei</button>
+            <button (click)="comentar()"><img src="./assets/img/icon/comentar.png">Comentar</button>
+            <button (click)="salvar()"><img src="./assets/img/icon/salvar.png">Salvar</button>
+        </div>
+        <div class="comentar" *ngIf="comment">
+            <input type="text" class="form-control" name="descricao" placeholder="Escrever um comentário" [(ngModel)]="descricao">
+            <button (click)="enviarComentario()" class="btn btn-custom">Comentar</button>
+        </div>
+        <div class="comentarios">
+            <section *ngFor="let comentario of comentarios">
+                <div>
+                    <img src="{{comentario.foto}}">
+                    <h3>{{comentario.user}}</h3>
+                </div>
+                
+                <div>
+                    <h4>{{comentario.descricao}}</h4>
+                </div>
+                
+            </section>
+        </div>
     </div>
-</div>
+    <div class="sobre">
+        <h3>Sobre</h3>
+        <div class="text"><h4>Título: <span>{{grafico.titulo}}</span></h4></div>
+        <div class="text"><h4>Disciplinas: <span>{{grafico.disciplina}}</span></h4></div>
+        <div class="text"><h4>Graus de escolaridade: <span>{{grafico.nivel}}</span></h4></div>
+        <div class="text"><h4>Impressora: <span>{{grafico.impressora}}</span></h4></div>
+        <div class="img-sobre"><img src="./assets/img/icon/gostar.png"><span>{{grafico.curtidas}} Curtidas</span></div>
+        <div class="img-sobre"><img src="./assets/img/icon/download.png"><span>{{grafico.downloads}} Downloads</span></div>
+        <div class="img-sobre"><img src="./assets/img/icon/view.png"><span>{{grafico.views}} Visualizações</span></div>
+        <button class="btn" (click)="downloadGrt()">Download (.grt)</button>
+        <button class="btn btn-custom" (click)="downloadZip()">Download (.zip)</button>
+    </div>
 </div>

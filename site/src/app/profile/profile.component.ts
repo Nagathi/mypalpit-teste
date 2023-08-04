@@ -15,7 +15,8 @@ export class ProfileComponent {
   private readonly apiURL = environment.apiURL;
   private readonly pathAttUser = environment.pathAttUser;
   private readonly pathDestaques = environment.pathDestaques;
-
+  private readonly pathVisualizar = environment.pathVisualizar;
+  
   codigo = this.usuarioService.usuario.codigo;
   foto = this.apiURL + "/" + this.usuarioService.usuario.foto;
   nome = this.usuarioService.usuario.nome;
@@ -40,21 +41,31 @@ export class ProfileComponent {
     this.http.get<any[]>(`${this.apiURL}/${this.pathDestaques}/${this.codigo}`).subscribe(data => {
       this.graficos = data.map(file => {
         const formattedKeywords = Array.isArray(file.keywords)
-          ? file.keywords.map((keyword: any) => `#${keyword.palavra}`)
-          : [];
-
-        return {
-          id: file.id,
-          arquivo: file.pathArquivo,
-          imagem: this.apiURL+"/"+file.pathImagem,
-          titulo: file.titulo,
-          keywords: formattedKeywords,
-          descricao: file.descricao,
-          data: file.data,
-          hora: file.hora,
-          curtidas: file.curtidas,
-          usuario: file.autorNome,
-          avatar: this.apiURL+"/"+file.pathFotoAutor
+            ? file.keywords.map((keyword: any) => `#${keyword.palavra}`)
+            : [];
+        const formattedDisciplinas = Array.isArray(file.materias)
+            ? file.materias.map((materia: any) => `${materia.disciplina}, `)
+            : [];
+        const formattedNiveis = Array.isArray(file.materias)
+            ? file.materias.map((materia: any) => `${materia.nivel}, `)
+            : [];
+          return {
+            arquivo: file.pathArquivo,
+            avatar: this.apiURL+"/"+file.pathFotoAutor,
+            curtidas: file.curtidas,
+            data: file.data,
+            descricao: file.descricao,
+            disciplina: formattedDisciplinas,
+            downloads: file.downloads,
+            hora: file.hora,
+            id: file.id,
+            imagem: this.apiURL+"/"+file.pathImagem,
+            impressora: file.impressora,
+            keywords: formattedKeywords,
+            nivel: formattedNiveis,
+            titulo: file.titulo,
+            usuario: file.autorNome,
+            views: file.views,
         };
       });
       this.graficos.sort((a, b) => b.id - a.id);
@@ -69,6 +80,9 @@ export class ProfileComponent {
     for(let i = 0; i < this.graficos.length; i++){
       if(this.graficos[i].id === id){
         this.graficoService.passarDados(this.graficos[i]);
+        this.http.post(`${this.apiURL}/${this.pathVisualizar}?id=${id}`, null).subscribe(response => {
+          
+        });
       }
     }
     this.router.navigate(['/grafico', id]);

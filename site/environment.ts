@@ -14,6 +14,9 @@ export const environment = {
     pathBusca: 'consulta',
     pathPesquisar: 'pesquisar',
     pathComentar: 'comentar',
-    pathListarComentarios: 'listar_comentarios'
+    pathListarComentarios: 'listar_comentarios',
+    pathDownload: 'baixar',
+    pathCurtir: 'curtir',
+    pathVisualizar: 'view'
   };
   

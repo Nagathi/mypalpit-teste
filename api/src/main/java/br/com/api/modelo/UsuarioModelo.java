@@ -25,6 +25,8 @@ public class UsuarioModelo {
     private String cidade;
     private String usuario;
     private String senha;
+    private String area;
+    private boolean notify;
 
 }
 
